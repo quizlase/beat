@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Strategic card game where you predict if the next card will be higher or lower. Features 5 game modes: Classic, Infinite, Panic, No Mercy, and 2-Player Battle Royale with lives system.">
+    <title>Beat the Deck Pro - Higher Lower Card Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/features/high-contrast.css">
+    <link rel="stylesheet" href="assets/css/features/two-player.css">
+    <link rel="stylesheet" href="assets/css/features/battle-royale.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="application-name" content="Beat the Deck Pro">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Beat Deck">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="msapplication-config" content="./favicon/browserconfig.xml">
+    <meta name="msapplication-TileColor" content="#16213e">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="theme-color" content="#16213e">
+    
+    <!-- Git Hash Meta Tag för Automatisk Versionhantering -->
+    <meta name="git-hash" content="initial-commit">
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="manifest" href="./favicon/site.webmanifest">
+    <link rel="shortcut icon" href="./favicon/favicon.ico">
+    
+    <!-- iOS Icons -->
+    <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./favicon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="./favicon/apple-touch-icon.png">
+    
+    <!-- Android Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./favicon/android-chrome-512x512.png">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- Panic Mode Timer Bar -->
+<div class="speed-timer-bar" id="speedTimerBar"></div>
+
+<!-- Main Game Container -->
+<div class="game-container" id="gameContainer">
+    <!-- Header -->
+    <header class="game-header">
+        <div class="header-left">
+            <button class="util-btn" id="lazyModeBtn" title="Lazy Mode - Show all buttons">
+                <span class="util-icon">↨</span>
+            </button>
+            <button class="util-btn" id="darkModeBtn" title="Dark Mode">
+                <span class="util-icon">🌙</span>
+            </button>
+        </div>
+        
+        <div class="header-center">
+            <h1 class="game-title" id="gameTitle">Beat the Deck Pro</h1>
+            <div class="game-stats" id="gameStats">
+                <span class="stat-item">
+                    <span class="stat-label">Score:</span>
+                    <span class="stat-value" id="scoreDisplay">0</span>
+                </span>
+                <span class="stat-item">
+                    <span class="stat-label">Time:</span>
+                    <span class="stat-value" id="timeDisplay">00:00</span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <button class="util-btn" id="restartBtn" title="Restart Game">
+                <span class="util-icon">↻</span>
+            </button>
+            <button class="util-btn" id="twoPlayerBtn" title="2 Player Mode">
+                <span class="util-icon">👥</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Game Board -->
+    <main class="game-board" id="gameBoard">
+        <!-- Card Grid -->
+        <div class="card-grid" id="cardGrid">
+            <!-- Cards will be generated dynamically -->
+        </div>
+        
+        <!-- Game Controls -->
+        <div class="game-controls" id="gameControls">
+            <button class="guess-btn higher-btn" id="higherBtn">
+                <span class="btn-icon">▲</span>
+                <span class="btn-text">Higher</span>
+            </button>
+            <button class="guess-btn lower-btn" id="lowerBtn">
+                <span class="btn-icon">▼</span>
+                <span class="btn-text">Lower</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <h2 id="gameOverTitle">Game Over!</h2>
+            <div class="modal-stats">
+                <div class="stat-row">
+                    <span class="stat-label">Final Score:</span>
+                    <span class="stat-value" id="finalScore">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Time:</span>
+                    <span class="stat-value" id="finalTime">00:00</span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="action-btn primary" id="playAgainBtn">Play Again</button>
+                <button class="action-btn secondary" id="highscoreBtn">Highscore</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-btn" id="closeSettingsBtn">×</button>
+            </div>
+            <div class="settings-content">
+                <!-- Settings will be populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Highscore Modal -->
+    <div class="modal" id="highscoreModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Highscores</h2>
+                <button class="close-btn" id="closeHighscoreBtn">×</button>
+            </div>
+            <div class="highscore-content">
+                <!-- Highscores will be populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 2 Player Mode Modal -->
+    <div class="modal" id="twoPlayerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>2 Player Mode</h2>
+                <button class="close-btn" id="closeTwoPlayerBtn">×</button>
+            </div>
+            <div class="two-player-content">
+                <!-- 2 Player content will be populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Battle Royale Overlay -->
+    <div class="battle-royale-overlay" id="battleRoyaleOverlay">
+        <div class="battle-royale-content">
+            <h2>⚔️ Battle Royale</h2>
+            <p>Fight your friend offline in turn-based combat - last player standing wins!</p>
+            <div class="battle-rules">
+                <div class="rule-item">
+                    <span class="rule-icon">♥</span>
+                    <span class="rule-text">3 Lives at start</span>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">❌</span>
+                    <span class="rule-text">Wrong = -1 Life</span>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">👑</span>
+                    <span class="rule-text">Last player wins</span>
+                </div>
+            </div>
+            <button class="battle-btn" id="startBattleRoyaleBtn">⚔️ Start Battle Royale</button>
+        </div>
+    </div>
+
+    <!-- Battle Royale Scoreboard -->
+    <div class="battle-royale-scoreboard" id="battleRoyaleScoreboard">
+        <div class="player-info">
+            <div class="player-name">Player 1</div>
+            <div class="player-lives">♥ ♥ ♥</div>
+        </div>
+        <div class="vs-indicator">VS</div>
+        <div class="player-info">
+            <div class="player-name">Player 2</div>
+            <div class="player-lives">♥ ♥ ♥</div>
+        </div>
+    </div>
+
+    <!-- Battle Royale Results -->
+    <div class="battle-royale-results" id="battleRoyaleResultsOverlay">
+        <div class="results-content">
+            <div class="victory-crown">👑</div>
+            <h2 class="victory-title">VICTORY ROYALE</h2>
+            <div class="winner-info">
+                <div class="winner-name" id="winnerName">Player 1</div>
+                <div class="winner-lives" id="winnerLives">♥ ♥ ♥</div>
+            </div>
+            <button class="rematch-btn" id="rematchBtn">Rematch</button>
+        </div>
+    </div>
+</div>
+
+<!-- Include the main game script -->
+<script src="script-custom.js"></script>
+</body>
+</html>

@@ -13,6 +13,7 @@ jobs:
       with:
         fetch-depth: 0  # Fetch full history for Git hash
         token: ${{ secrets.GITHUB_TOKEN }}
+        persist-credentials: true
     
     - name: Get short Git hash
       id: git-hash
@@ -38,12 +39,12 @@ jobs:
     - name: Commit and push changes
       if: steps.check-hash.outputs.skip == 'false'
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
         git add index.html
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
           git commit -m "🔄 Update PWA Git hash to ${{ steps.git-hash.outputs.hash }}"
-          git push
+          git push origin main
         fi

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Beat the Deck Pro</title>
+    <meta name="theme-color" content="#16213e">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .offline-icon {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .secondary-btn {
+            background: linear-gradient(45deg, #666, #555);
+            box-shadow: 0 4px 15px rgba(102, 102, 102, 0.3);
+        }
+        
+        .secondary-btn:hover {
+            box-shadow: 0 6px 20px rgba(102, 102, 102, 0.4);
+        }
+        
+        .game-info {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .game-info h3 {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+        
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .offline-status {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .online-status {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            .offline-icon { font-size: 4rem; }
+            p { font-size: 1rem; }
+            button { min-width: 150px; padding: 12px 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="connection-status offline-status" id="connectionStatus">
+        📶 Offline
+    </div>
+    
+    <div class="container">
+        <div class="offline-icon">🃏</div>
+        <h1>You're Offline</h1>
+        <p>Beat the Deck Pro needs an internet connection to function properly.</p>
+        <p>Please check your connection and try again.</p>
+        
+        <div class="buttons">
+            <button onclick="checkConnection()">🔄 Try Again</button>
+            <button class="secondary-btn" onclick="goHome()">🏠 Go to Main Game</button>
+        </div>
+        
+        <div class="game-info">
+            <h3>About Beat the Deck Pro</h3>
+            <p>Strategic card game where you predict if the next card will be higher or lower. Features multiple game modes including Battle Royale!</p>
+        </div>
+    </div>
+
+    <script>
+        function checkConnection() {
+            const statusEl = document.getElementById('connectionStatus');
+            
+            if (navigator.onLine) {
+                statusEl.textContent = '📶 Online';
+                statusEl.className = 'connection-status online-status';
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                // Try to fetch a small resource to verify connection
+                fetch('./favicon/favicon-16x16.png?t=' + Date.now(), { 
+                    method: 'HEAD',
+                    cache: 'no-store'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        statusEl.textContent = '📶 Connected!';
+                        statusEl.className = 'connection-status online-status';
+                        setTimeout(() => {
+                            window.location.href = './';
+                        }, 1000);
+                    } else {
+                        throw new Error('Not connected');
+                    }
+                })
+                .catch(() => {
+                    statusEl.textContent = '📶 Still Offline';
+                    statusEl.className = 'connection-status offline-status';
+                    setTimeout(() => {
+                        statusEl.textContent = '📶 Offline';
+                    }, 2000);
+                });
+            }
+        }
+        
+        function goHome() {
+            if (navigator.onLine) {
+                window.location.href = './';
+            } else {
+                alert('Still offline. Please check your internet connection.');
+            }
+        }
+        
+        // Monitor connection status
+        window.addEventListener('online', () => {
+            const statusEl = document.getElementById('connectionStatus');
+            statusEl.textContent = '📶 Back Online!';
+            statusEl.className = 'connection-status online-status';
+            setTimeout(() => {
+                window.location.href = './';
+            }, 1500);
+        });
+        
+        window.addEventListener('offline', () => {
+            const statusEl = document.getElementById('connectionStatus');
+            statusEl.textContent = '📶 Connection Lost';
+            statusEl.className = 'connection-status offline-status';
+            setTimeout(() => {
+                statusEl.textContent = '📶 Offline';
+            }, 3000);
+        });
+        
+        // Auto-retry every 30 seconds
+        setInterval(() => {
+            if (navigator.onLine) {
+                checkConnection();
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
