@@ -165,7 +165,7 @@
                 }, 1000);
             } else {
                 // Try to fetch a small resource to verify connection
-                fetch('/favicon/favicon-16x16.png?t=' + Date.now(), { 
+                fetch('/beat/favicon/favicon-16x16.png?t=' + Date.now(), { 
                     method: 'HEAD',
                     cache: 'no-store'
                 })
@@ -174,7 +174,7 @@
                         statusEl.textContent = '📶 Connected!';
                         statusEl.className = 'connection-status online-status';
                         setTimeout(() => {
-                            window.location.href = '/';
+                            window.location.href = '/beat/';
                         }, 1000);
                     } else {
                         throw new Error('Not connected');
@@ -192,7 +192,7 @@
         
         function goHome() {
             if (navigator.onLine) {
-                window.location.href = '/';
+                window.location.href = '/beat/';
             } else {
                 alert('Still offline. Please check your internet connection.');
             }
@@ -204,7 +204,7 @@
             statusEl.textContent = '📶 Back Online!';
             statusEl.className = 'connection-status online-status';
             setTimeout(() => {
-                window.location.href = '/';
+                window.location.href = '/beat/';
             }, 1500);
         });
         

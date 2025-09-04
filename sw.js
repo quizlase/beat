@@ -1,4 +1,4 @@
-// Service Worker med Git Hash Versionhantering
+// Service Worker med Git Hash Versionhantering - Custom Domain Compatible
 class ServiceWorkerManager {
   constructor() {
     this.version = this.getGitHashVersion();
@@ -15,7 +15,8 @@ class ServiceWorkerManager {
 
   async fetchGitHashFromHTML() {
     try {
-      const response = await fetch('/index.html');
+      // Use absolute path for custom domain compatibility
+      const response = await fetch('/beat/index.html');
       const text = await response.text();
       const match = text.match(/<meta name="git-hash" content="([^"]+)"/);
       return match ? match[1] : null;
@@ -84,7 +85,7 @@ class ServiceWorkerManager {
             console.log('Fetch failed:', error);
             // Return offline page for document requests
             if (event.request.destination === 'document') {
-              return caches.match('/offline.html') || caches.match('/index.html');
+              return caches.match('/beat/offline.html') || caches.match('/beat/index.html');
             }
           })
       );
@@ -101,21 +102,21 @@ class ServiceWorkerManager {
 
   getUrlsToCache() {
     return [
-      '/',
-      '/index.html',
-      '/script.js',
-      '/style.css',
-      '/offline.html',
-      '/assets/css/features/high-contrast.css',
-      '/assets/css/features/two-player.css',
-      '/assets/css/features/battle-royale.css',
-      '/favicon/android-chrome-192x192.png',
-      '/favicon/android-chrome-512x512.png',
-      '/favicon/apple-touch-icon.png',
-      '/favicon/favicon-32x32.png',
-      '/favicon/favicon-16x16.png',
-      '/favicon/favicon.ico',
-      '/favicon/site.webmanifest',
+      '/beat/',
+      '/beat/index.html',
+      '/beat/script.js',
+      '/beat/style.css',
+      '/beat/offline.html',
+      '/beat/assets/css/features/high-contrast.css',
+      '/beat/assets/css/features/two-player.css',
+      '/beat/assets/css/features/battle-royale.css',
+      '/beat/favicon/android-chrome-192x192.png',
+      '/beat/favicon/android-chrome-512x512.png',
+      '/beat/favicon/apple-touch-icon.png',
+      '/beat/favicon/favicon-32x32.png',
+      '/beat/favicon/favicon-16x16.png',
+      '/beat/favicon/favicon.ico',
+      '/beat/favicon/site.webmanifest',
       'https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js'
     ];
   }
