@@ -562,12 +562,51 @@ function loadSettings() {
   }
 }
 
-// Vibrationsfunktion
+// Vibrationsfunktion - Förbättrad för PWA
 function triggerVibration(pattern = [100]) {
-  if (isVibrationEnabled && 'vibrate' in navigator) {
-    navigator.vibrate(pattern);
+  console.log('Vibration attempt:', { isVibrationEnabled, hasVibrate: 'vibrate' in navigator, pattern });
+  
+  if (!isVibrationEnabled) {
+    console.log('Vibration disabled in settings');
+    return;
+  }
+  
+  if (!('vibrate' in navigator)) {
+    console.log('Vibration not supported on this device');
+    return;
+  }
+  
+  try {
+    // Försök vibration med fallback
+    if (navigator.vibrate) {
+      navigator.vibrate(pattern);
+      console.log('Vibration triggered successfully');
+    } else if (navigator.webkitVibrate) {
+      navigator.webkitVibrate(pattern);
+      console.log('Webkit vibration triggered successfully');
+    } else {
+      console.log('No vibration method available');
+    }
+  } catch (error) {
+    console.log('Vibration error:', error);
   }
 }
+
+// Debug funktion för att testa vibration
+function testVibration() {
+  console.log('Testing vibration...');
+  console.log('isVibrationEnabled:', isVibrationEnabled);
+  console.log('navigator.vibrate available:', 'vibrate' in navigator);
+  console.log('User agent:', navigator.userAgent);
+  
+  // Test olika vibration patterns
+  triggerVibration([100]);
+  setTimeout(() => triggerVibration([50, 50, 50]), 200);
+  setTimeout(() => triggerVibration([200]), 500);
+}
+
+// Exponera test-funktionen globalt för debugging
+window.testVibration = testVibration;
 
 const suits = ['♠', '♥', '♦', '♣'];
 const suitColors = { '♠': 'black', '♣': 'black', '♥': 'red', '♦': 'red' };
@@ -2055,6 +2094,12 @@ document.addEventListener('DOMContentLoaded', function() {
     vibrationToggle.onchange = function() {
       isVibrationEnabled = this.checked;
       localStorage.setItem('vibrationEnabled', this.checked.toString());
+      
+      // Test vibration när toggle aktiveras
+      if (this.checked) {
+        console.log('Vibration enabled - testing...');
+        triggerVibration([200, 100, 200]);
+      }
     };
   }
 
@@ -3889,28 +3934,33 @@ class PWAInstaller {
         text-align: center;
         max-width: 300px;
         font-family: Arial, sans-serif;
+        border: 2px solid #FFD700;
       ">
-        <div style="font-weight: bold; margin-bottom: 10px;">🔄 Update Available!</div>
+        <div style="font-weight: bold; margin-bottom: 10px; color: #FFD700;">🔄 Update Available!</div>
         <div style="font-size: 12px; margin-bottom: 5px; opacity: 0.8;">Current: ${this.currentGitHash}</div>
         <div style="font-size: 14px; margin-bottom: 15px;">A new version is ready to install.</div>
         <button id="update-btn" style="
-          background: #4CAF50;
-          color: white;
-          border: none;
+          background: #FFD700;
+          color: #16213e;
+          border: 2px solid #FFD700;
           padding: 8px 16px;
           border-radius: 5px;
           cursor: pointer;
           margin-right: 10px;
           font-family: Arial, sans-serif;
+          font-weight: bold;
+          transition: all 0.3s ease;
         ">Update Now</button>
         <button id="dismiss-update" style="
-          background: #666;
-          color: white;
-          border: none;
+          background: #1a1a2e;
+          color: #FFD700;
+          border: 2px solid #FFD700;
           padding: 8px 16px;
           border-radius: 5px;
           cursor: pointer;
           font-family: Arial, sans-serif;
+          font-weight: bold;
+          transition: all 0.3s ease;
         ">Later</button>
       </div>
     `;
@@ -3924,6 +3974,34 @@ class PWAInstaller {
 
     document.getElementById('dismiss-update').addEventListener('click', () => {
       updateDiv.remove();
+    });
+
+    // Add hover effects
+    const updateBtn = document.getElementById('update-btn');
+    const dismissBtn = document.getElementById('dismiss-update');
+    
+    updateBtn.addEventListener('mouseenter', () => {
+      updateBtn.style.background = '#FFA500';
+      updateBtn.style.borderColor = '#FFA500';
+      updateBtn.style.transform = 'scale(1.05)';
+    });
+    
+    updateBtn.addEventListener('mouseleave', () => {
+      updateBtn.style.background = '#FFD700';
+      updateBtn.style.borderColor = '#FFD700';
+      updateBtn.style.transform = 'scale(1)';
+    });
+    
+    dismissBtn.addEventListener('mouseenter', () => {
+      dismissBtn.style.background = '#FFD700';
+      dismissBtn.style.color = '#16213e';
+      dismissBtn.style.transform = 'scale(1.05)';
+    });
+    
+    dismissBtn.addEventListener('mouseleave', () => {
+      dismissBtn.style.background = '#1a1a2e';
+      dismissBtn.style.color = '#FFD700';
+      dismissBtn.style.transform = 'scale(1)';
     });
 
     // Auto-dismiss after 15 seconds

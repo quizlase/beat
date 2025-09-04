@@ -1,0 +1,93 @@
+/* PWA Fixes - Disable pull-to-refresh and improve app experience */
+
+/* Disable pull-to-refresh on mobile */
+body {
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+}
+
+/* Prevent bounce effect on iOS */
+html, body {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+/* Allow scrolling within game container */
+.game-container {
+  overflow-y: auto;
+  height: 100vh;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Disable text selection on game elements */
+.game-board, .card-grid, .game-controls {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Disable context menu on long press */
+.game-board, .card-grid, .game-controls {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Prevent zoom on double tap */
+.game-board, .card-grid {
+  touch-action: manipulation;
+}
+
+/* Hide scrollbars but keep functionality */
+.game-container::-webkit-scrollbar {
+  display: none;
+}
+
+.game-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* PWA specific styles */
+@media (display-mode: standalone) {
+  /* Hide address bar space when in PWA mode */
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Ensure full height in PWA */
+  .game-container {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+  
+  /* Disable pull-to-refresh specifically in PWA */
+  body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+  }
+}
+
+/* Prevent overscroll on all elements */
+* {
+  overscroll-behavior: none;
+}
+
+/* Disable rubber band effect on iOS */
+html {
+  overscroll-behavior-y: none;
+}
+
+/* Ensure game elements don't trigger pull-to-refresh */
+.card-grid, .game-controls, .modal, .battle-royale-overlay {
+  overscroll-behavior: contain;
+}

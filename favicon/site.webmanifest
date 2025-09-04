@@ -1,6 +1,6 @@
 {
   "name": "Beat the Deck Pro",
-  "short_name": "Beat Deck",
+  "short_name": "Beat the Deck Pro",
   "description": "Strategic card game where you predict if the next card will be higher or lower",
   "start_url": "/beat/",
   "display": "standalone",
