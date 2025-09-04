@@ -4,8 +4,8 @@
   "description": "Strategic card game where you predict if the next card will be higher or lower",
   "start_url": "/beat/",
   "display": "standalone",
-  "background_color": "#1a1a2e",
-  "theme_color": "#16213e",
+  "background_color": "#2c3e50",
+  "theme_color": "#34495e",
   "orientation": "portrait-primary",
   "scope": "/beat/",
   "lang": "en",
@@ -26,9 +26,16 @@
   ],
   "splash_screens": [
     {
-      "src": "/beat/assets/splash.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "/beat/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/beat/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "form_factor": "narrow"
     }
   ],
   "screenshots": [
