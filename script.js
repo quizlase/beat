@@ -564,31 +564,71 @@ function loadSettings() {
 
 // Vibrationsfunktion - Förbättrad för PWA
 function triggerVibration(pattern = [100]) {
-  console.log('Vibration attempt:', { isVibrationEnabled, hasVibrate: 'vibrate' in navigator, pattern });
+  console.log('Vibration attempt:', { 
+    isVibrationEnabled, 
+    hasVibrate: 'vibrate' in navigator, 
+    hasWebkitVibrate: 'webkitVibrate' in navigator,
+    pattern,
+    userAgent: navigator.userAgent,
+    isPWA: window.matchMedia('(display-mode: standalone)').matches
+  });
   
   if (!isVibrationEnabled) {
     console.log('Vibration disabled in settings');
     return;
   }
   
-  if (!('vibrate' in navigator)) {
-    console.log('Vibration not supported on this device');
+  // Kontrollera om vi är i PWA-läge
+  const isPWA = window.matchMedia('(display-mode: standalone)').matches || 
+                window.navigator.standalone === true ||
+                document.referrer.includes('android-app://');
+  
+  console.log('PWA mode detected:', isPWA);
+  
+  // Kontrollera stöd för vibration
+  const hasVibrate = 'vibrate' in navigator;
+  const hasWebkitVibrate = 'webkitVibrate' in navigator;
+  
+  if (!hasVibrate && !hasWebkitVibrate) {
+    console.log('Vibration not supported on this device/browser');
+    console.log('Available vibration methods:', {
+      vibrate: hasVibrate,
+      webkitVibrate: hasWebkitVibrate,
+      navigator: Object.keys(navigator).filter(key => key.includes('vibrat'))
+    });
     return;
   }
   
   try {
-    // Försök vibration med fallback
-    if (navigator.vibrate) {
-      navigator.vibrate(pattern);
-      console.log('Vibration triggered successfully');
-    } else if (navigator.webkitVibrate) {
-      navigator.webkitVibrate(pattern);
-      console.log('Webkit vibration triggered successfully');
-    } else {
-      console.log('No vibration method available');
+    // Försök standard vibration först
+    if (hasVibrate) {
+      const result = navigator.vibrate(pattern);
+      console.log('Standard vibration result:', result);
+      if (result) {
+        console.log('Vibration triggered successfully with standard API');
+        return;
+      }
     }
+    
+    // Fallback till webkit vibration
+    if (hasWebkitVibrate) {
+      const result = navigator.webkitVibrate(pattern);
+      console.log('Webkit vibration result:', result);
+      if (result) {
+        console.log('Vibration triggered successfully with webkit API');
+        return;
+      }
+    }
+    
+    console.log('No vibration method returned true');
+    
   } catch (error) {
     console.log('Vibration error:', error);
+    console.log('Error details:', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack
+    });
   }
 }
 
@@ -622,6 +662,93 @@ window.testInstallButton = function() {
   installer.isInstalled = false; // Force show button
   installer.showInstallButton();
 };
+
+// Återställ dold install-knapp
+window.resetInstallButton = function() {
+  console.log('Resetting install button visibility...');
+  localStorage.removeItem('pwa-install-hidden');
+  console.log('Install button will show again on next page load');
+  // Visa knappen direkt också
+  const installer = new PWAInstaller();
+  installer.isInstalled = false;
+  installer.showInstallButton();
+};
+
+// Test funktion för splash screen
+window.testSplash = function() {
+  console.log('Testing splash screen...');
+  showSplashScreen();
+};
+
+// Kontrollera vibration-stöd vid sidladdning
+function checkVibrationSupport() {
+  console.log('=== VIBRATION SUPPORT CHECK ===');
+  console.log('User Agent:', navigator.userAgent);
+  console.log('PWA Mode:', window.matchMedia('(display-mode: standalone)').matches);
+  console.log('Standalone:', window.navigator.standalone);
+  console.log('Referrer:', document.referrer);
+  
+  const hasVibrate = 'vibrate' in navigator;
+  const hasWebkitVibrate = 'webkitVibrate' in navigator;
+  
+  console.log('Vibration Support:', {
+    standard: hasVibrate,
+    webkit: hasWebkitVibrate,
+    supported: hasVibrate || hasWebkitVibrate
+  });
+  
+  if (!hasVibrate && !hasWebkitVibrate) {
+    console.warn('⚠️ Vibration API not supported on this device/browser');
+    console.log('This might be because:');
+    console.log('1. Device doesn\'t support vibration');
+    console.log('2. Browser doesn\'t support Vibration API');
+    console.log('3. Running in non-secure context (HTTP instead of HTTPS)');
+    console.log('4. PWA restrictions');
+  } else {
+    console.log('✅ Vibration API is supported');
+  }
+  
+  return hasVibrate || hasWebkitVibrate;
+}
+
+// Kör kontrollen vid sidladdning
+document.addEventListener('DOMContentLoaded', checkVibrationSupport);
+
+// Splash Screen with Scale Animation
+function showSplashScreen() {
+  const splash = document.getElementById('splash-screen');
+  const logo = document.getElementById('splash-logo');
+  
+  if (splash && logo) {
+    // Set initial state - logo starts at 80%
+    logo.style.transform = 'scale(0.8)';
+    
+    // Force reflow
+    logo.offsetHeight;
+    
+    // Scale up logo (80% to 100%) after brief delay
+    setTimeout(() => {
+      logo.classList.add('scale-up');
+    }, 50);
+    
+    // Fade out logo after 0.3 seconds
+    setTimeout(() => {
+      logo.classList.add('fade-out');
+    }, 300);
+    
+    // Hide splash screen after 0.8 seconds (0.3s scale + 0.5s fade)
+    setTimeout(() => {
+      splash.style.display = 'none';
+    }, 800);
+  }
+}
+
+// Show splash screen when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', showSplashScreen);
+} else {
+  showSplashScreen();
+}
 
 const suits = ['♠', '♥', '♦', '♣'];
 const suitColors = { '♠': 'black', '♣': 'black', '♥': 'red', '♦': 'red' };
@@ -3893,50 +4020,104 @@ class PWAInstaller {
     // Don't show button if already installed
     if (this.isInstalled) return;
     
+    // Check if user has hidden the button
+    const isHidden = localStorage.getItem('pwa-install-hidden') === 'true';
+    if (isHidden) {
+      console.log('Install button hidden by user');
+      return;
+    }
+    
     // Remove any existing install button first
     const existingBtn = document.getElementById('pwa-install-btn');
     if (existingBtn) {
       existingBtn.remove();
     }
     
+    // Create install button container
+    const installContainer = document.createElement('div');
+    installContainer.id = 'pwa-install-btn';
+    installContainer.style.cssText = `
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #16213e;
+      padding: 15px 20px;
+      border-radius: 30px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+      font-family: Arial, sans-serif;
+    `;
+    
     // Create install button
     const installBtn = document.createElement('button');
-    installBtn.id = 'pwa-install-btn';
     installBtn.innerHTML = '📱 Install app';
+    installBtn.style.cssText = `
+      background: transparent;
+      color: white;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+    `;
     
-    // Apply styles directly to ensure they take effect
-    installBtn.style.position = 'fixed';
-    installBtn.style.top = '20px';
-    installBtn.style.left = '50%';
-    installBtn.style.transform = 'translateX(-50%)';
-    installBtn.style.background = '#16213e';
-    installBtn.style.color = 'white';
-    installBtn.style.border = 'none';
-    installBtn.style.padding = '15px 30px';
-    installBtn.style.borderRadius = '30px';
-    installBtn.style.fontSize = '16px';
-    installBtn.style.fontWeight = 'bold';
-    installBtn.style.cursor = 'pointer';
-    installBtn.style.zIndex = '1000';
-    installBtn.style.boxShadow = '0 6px 20px rgba(0,0,0,0.4)';
-    installBtn.style.transition = 'all 0.3s ease';
-    installBtn.style.fontFamily = 'Arial, sans-serif';
-    installBtn.style.display = 'block';
-    installBtn.style.width = 'auto';
-    installBtn.style.height = 'auto';
+    // Create checkbox
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = 'hide-install-checkbox';
+    checkbox.style.cssText = `
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: #4CAF50;
+    `;
     
+    // Create label for checkbox
+    const label = document.createElement('label');
+    label.htmlFor = 'hide-install-checkbox';
+    label.textContent = 'Dölj';
+    label.style.cssText = `
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
+    `;
+    
+    // Add event listeners
     installBtn.addEventListener('click', () => this.installApp());
-    installBtn.addEventListener('mouseenter', () => {
-      installBtn.style.transform = 'translateX(-50%) scale(1.05)';
-      installBtn.style.background = '#1a1a2e';
+    
+    checkbox.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        localStorage.setItem('pwa-install-hidden', 'true');
+        installContainer.remove();
+        console.log('Install button hidden until next visit');
+      }
     });
-    installBtn.addEventListener('mouseleave', () => {
-      installBtn.style.transform = 'translateX(-50%) scale(1)';
-      installBtn.style.background = '#16213e';
+    
+    // Hover effects
+    installContainer.addEventListener('mouseenter', () => {
+      installContainer.style.transform = 'translateX(-50%) scale(1.05)';
+      installContainer.style.background = '#1a1a2e';
+    });
+    
+    installContainer.addEventListener('mouseleave', () => {
+      installContainer.style.transform = 'translateX(-50%) scale(1)';
+      installContainer.style.background = '#16213e';
     });
 
-    document.body.appendChild(installBtn);
-    console.log('Install button created and positioned at top center');
+    // Assemble the container
+    installContainer.appendChild(installBtn);
+    installContainer.appendChild(checkbox);
+    installContainer.appendChild(label);
+    
+    document.body.appendChild(installContainer);
+    console.log('Install button with hide option created and positioned at top center');
   }
 
   hideInstallButton() {

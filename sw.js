@@ -108,6 +108,7 @@ class ServiceWorkerManager {
       '/beat/style.css',
       '/beat/pwa-fixes.css',
       '/beat/offline.html',
+      '/beat/assets/splash.svg',
       '/beat/assets/css/features/high-contrast.css',
       '/beat/assets/css/features/two-player.css',
       '/beat/assets/css/features/battle-royale.css',
