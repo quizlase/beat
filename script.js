@@ -615,6 +615,14 @@ window.testUpdate = function() {
   installer.showUpdateNotification();
 };
 
+// Test funktion för install-knapp
+window.testInstallButton = function() {
+  console.log('Testing install button...');
+  const installer = new PWAInstaller();
+  installer.isInstalled = false; // Force show button
+  installer.showInstallButton();
+};
+
 const suits = ['♠', '♥', '♦', '♣'];
 const suitColors = { '♠': 'black', '♣': 'black', '♥': 'red', '♦': 'red' };
 const ranks = [
@@ -3885,28 +3893,37 @@ class PWAInstaller {
     // Don't show button if already installed
     if (this.isInstalled) return;
     
+    // Remove any existing install button first
+    const existingBtn = document.getElementById('pwa-install-btn');
+    if (existingBtn) {
+      existingBtn.remove();
+    }
+    
     // Create install button
     const installBtn = document.createElement('button');
     installBtn.id = 'pwa-install-btn';
     installBtn.innerHTML = '📱 Install Beat the Deck Pro';
-    installBtn.style.cssText = `
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #16213e;
-      color: white;
-      border: 2px solid #4CAF50;
-      padding: 15px 30px;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 1000;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-      transition: all 0.3s ease;
-      font-family: Arial, sans-serif;
-    `;
+    
+    // Apply styles directly to ensure they take effect
+    installBtn.style.position = 'fixed';
+    installBtn.style.top = '20px';
+    installBtn.style.left = '50%';
+    installBtn.style.transform = 'translateX(-50%)';
+    installBtn.style.background = '#16213e';
+    installBtn.style.color = 'white';
+    installBtn.style.border = '2px solid #4CAF50';
+    installBtn.style.padding = '15px 30px';
+    installBtn.style.borderRadius = '30px';
+    installBtn.style.fontSize = '16px';
+    installBtn.style.fontWeight = 'bold';
+    installBtn.style.cursor = 'pointer';
+    installBtn.style.zIndex = '1000';
+    installBtn.style.boxShadow = '0 6px 20px rgba(0,0,0,0.4)';
+    installBtn.style.transition = 'all 0.3s ease';
+    installBtn.style.fontFamily = 'Arial, sans-serif';
+    installBtn.style.display = 'block';
+    installBtn.style.width = 'auto';
+    installBtn.style.height = 'auto';
     
     installBtn.addEventListener('click', () => this.installApp());
     installBtn.addEventListener('mouseenter', () => {
@@ -3921,6 +3938,7 @@ class PWAInstaller {
     });
 
     document.body.appendChild(installBtn);
+    console.log('Install button created and positioned at top center');
   }
 
   hideInstallButton() {
