@@ -716,6 +716,20 @@ document.addEventListener('DOMContentLoaded', checkVibrationSupport);
 
 // Splash Screen with Scale Animation
 function showSplashScreen() {
+  // Check if running as PWA - if so, don't show custom splash screen
+  const isPWA = window.matchMedia('(display-mode: standalone)').matches || 
+                window.navigator.standalone === true ||
+                document.referrer.includes('android-app://');
+  
+  if (isPWA) {
+    console.log('Running as PWA, hiding custom splash screen');
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+      splash.style.display = 'none';
+    }
+    return;
+  }
+  
   const splash = document.getElementById('splash-screen');
   const logo = document.getElementById('splash-logo');
   
@@ -4156,41 +4170,45 @@ class PWAInstaller {
         transform: translateX(-50%);
         background: #16213e;
         color: white;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        padding: 20px 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         z-index: 1001;
         text-align: center;
-        max-width: 300px;
+        max-width: 500px;
+        width: 90%;
         font-family: Arial, sans-serif;
         border: 2px solid #FFD700;
       ">
-        <div style="font-weight: bold; margin-bottom: 10px; color: #FFD700;">🔄 Update Available!</div>
+        <div style="font-weight: bold; margin-bottom: 10px; color: #FFD700; font-size: 18px;">🔄 Update Available!</div>
         <div style="font-size: 12px; margin-bottom: 5px; opacity: 0.8;">Current: ${this.currentGitHash}</div>
-        <div style="font-size: 14px; margin-bottom: 15px;">A new version is ready to install.</div>
-        <button id="update-btn" style="
-          background: #FFD700;
-          color: #16213e;
-          border: 2px solid #FFD700;
-          padding: 8px 16px;
-          border-radius: 5px;
-          cursor: pointer;
-          margin-right: 10px;
-          font-family: Arial, sans-serif;
-          font-weight: bold;
-          transition: all 0.3s ease;
-        ">Update Now</button>
-        <button id="dismiss-update" style="
-          background: #1a1a2e;
-          color: #FFD700;
-          border: 2px solid #FFD700;
-          padding: 8px 16px;
-          border-radius: 5px;
-          cursor: pointer;
-          font-family: Arial, sans-serif;
-          font-weight: bold;
-          transition: all 0.3s ease;
-        ">Later</button>
+        <div style="font-size: 16px; margin-bottom: 20px;">A new version is ready to install.</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+          <button id="dismiss-update" style="
+            background: #1a1a2e;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            flex: 1;
+          ">Later</button>
+          <button id="update-btn" style="
+            background: #FFD700;
+            color: #16213e;
+            border: 2px solid #FFD700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            flex: 1;
+          ">Update Now</button>
+        </div>
       </div>
     `;
 
