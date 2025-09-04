@@ -1,0 +1,49 @@
+name: Update PWA Git Hash
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  update-git-hash:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch full history for Git hash
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Get short Git hash
+      id: git-hash
+      run: echo "hash=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+    
+    - name: Check if hash already updated
+      id: check-hash
+      run: |
+        CURRENT_HASH=$(grep -o 'content="[^"]*"' index.html | grep git-hash | cut -d'"' -f2)
+        echo "current-hash=$CURRENT_HASH" >> $GITHUB_OUTPUT
+        if [ "$CURRENT_HASH" = "${{ steps.git-hash.outputs.hash }}" ]; then
+          echo "skip=true" >> $GITHUB_OUTPUT
+        else
+          echo "skip=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Update Git hash in HTML
+      if: steps.check-hash.outputs.skip == 'false'
+      run: |
+        sed -i 's/<meta name="git-hash" content="[^"]*">/<meta name="git-hash" content="${{ steps.git-hash.outputs.hash }}">/' index.html
+        echo "Updated Git hash from ${{ steps.check-hash.outputs.current-hash }} to ${{ steps.git-hash.outputs.hash }}"
+    
+    - name: Commit and push changes
+      if: steps.check-hash.outputs.skip == 'false'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add index.html
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "🔄 Update PWA Git hash to ${{ steps.git-hash.outputs.hash }}"
+          git push
+        fi
