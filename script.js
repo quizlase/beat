@@ -605,8 +605,15 @@ function testVibration() {
   setTimeout(() => triggerVibration([200]), 500);
 }
 
-// Exponera test-funktionen globalt för debugging
+// Exponera test-funktioner globalt för debugging
 window.testVibration = testVibration;
+
+// Test funktion för uppdateringar
+window.testUpdate = function() {
+  console.log('Testing update notification...');
+  const installer = new PWAInstaller();
+  installer.showUpdateNotification();
+};
 
 const suits = ['♠', '♥', '♦', '♣'];
 const suitColors = { '♠': 'black', '♣': 'black', '♥': 'red', '♦': 'red' };
@@ -3827,14 +3834,26 @@ class PWAInstaller {
   async registerServiceWorker() {
     if ('serviceWorker' in navigator) {
       try {
-        const registration = await navigator.serviceWorker.register('/sw.js');
+        // Use correct path for custom domain
+        const registration = await navigator.serviceWorker.register('/beat/sw.js');
         console.log('Service Worker registered for Git Hash:', this.currentGitHash);
 
-        // Check for updates
+        // Check for updates immediately
+        await this.checkForUpdates(registration);
+
+        // Check for updates periodically
+        setInterval(() => {
+          this.checkForUpdates(registration);
+        }, 30000); // Check every 30 seconds
+
+        // Listen for updatefound event
         registration.addEventListener('updatefound', () => {
+          console.log('Service Worker update found!');
           const newWorker = registration.installing;
           newWorker.addEventListener('statechange', () => {
+            console.log('New worker state:', newWorker.state);
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              console.log('New version installed, showing notification');
               this.showUpdateNotification();
             }
           });
@@ -3849,6 +3868,16 @@ class PWAInstaller {
       } catch (error) {
         console.log('Service Worker registration failed:', error);
       }
+    }
+  }
+
+  async checkForUpdates(registration) {
+    try {
+      console.log('Checking for updates...');
+      await registration.update();
+      console.log('Update check completed');
+    } catch (error) {
+      console.log('Update check failed:', error);
     }
   }
 
