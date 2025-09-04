@@ -1,0 +1,2527 @@
+/* High Contrast Mode - Accessibility Enhancement */
+/* This file provides enhanced contrast and color-blind friendly design */
+
+/* Main Body */
+body.high-contrast {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Card Styling */
+body.high-contrast .card {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #000000 !important;
+}
+
+body.high-contrast .card.red {
+  color: #ff0000 !important;
+  background: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .card.lost {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 3px solid #ffffff !important;
+}
+
+body.high-contrast .card.selected {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 6px #000000, 0 0 20px #ffffff !important;
+}
+
+body.high-contrast .lost-card {
+  color: #ffffff !important;
+  background: #000000 !important;
+}
+
+/* Button Styling */
+body.high-contrast .buttons button.up,
+body.high-contrast .buttons button.down {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .buttons button.up:hover,
+body.high-contrast .buttons button.down:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Scoreboard */
+body.high-contrast #scoreboard {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+}
+
+body.high-contrast #scoreboard .label {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast #scoreboard .value {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Game Controls */
+body.high-contrast #gameControls button {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #gameControls button:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast #gameControls button.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Overlays */
+body.high-contrast .overlayContent {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: none !important;
+}
+
+body.high-contrast .overlayContent h2,
+body.high-contrast .overlayContent h3 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .overlayTitle {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Win/Game Over Overlay Text */
+body.high-contrast .overlaySubtitle,
+body.high-contrast .overlayScore,
+body.high-contrast .overlayTime {
+  color: #000000 !important;
+}
+
+body.high-contrast .game-over-content h2,
+body.high-contrast .game-over-content p {
+  color: #000000 !important;
+}
+
+/* Overlay Stats */
+body.high-contrast .overlay-stats {
+  color: #000000 !important;
+}
+
+body.high-contrast .overlay-stats p {
+  color: #000000 !important;
+}
+
+body.high-contrast .overlay-stats span {
+  color: #000000 !important;
+}
+
+/* Action Buttons */
+body.high-contrast .rules-action-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .rules-action-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .rules-action-btn.primary {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .rules-action-btn.primary:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .rules-action-btn.gold {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .rules-action-btn.gold:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .rules-action-btn.tutorial {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .rules-action-btn.tutorial:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Toggle Switches */
+body.high-contrast .toggle-switch {
+  width: 50px !important;
+  height: 24px !important;
+}
+
+body.high-contrast .toggle-switch .toggle-label {
+  background: #ffffff !important;
+  border: 1px solid #000000 !important;
+  box-sizing: border-box !important;
+  width: 50px !important;
+  height: 24px !important;
+}
+
+body.high-contrast .toggle-switch .toggle-label:before {
+  background: #000000 !important;
+  width: 16px !important;
+  height: 16px !important;
+  left: 3px !important;
+  bottom: 3px !important;
+}
+
+body.high-contrast .toggle-input:checked + .toggle-label {
+  background: #000000 !important;
+  border: 1px solid #ffffff !important;
+}
+
+body.high-contrast .toggle-input:checked + .toggle-label:before {
+  background: #ffffff !important;
+  transform: translateX(24px) !important;
+}
+
+body.high-contrast .toggle-switch .toggle-label:hover {
+  background: #f0f0f0 !important;
+  border: 1px solid #000000 !important;
+}
+
+/* High contrast dropdown styling */
+body.high-contrast .dropdown-select {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+  font-weight: bold !important;
+  padding: 12px 18px !important;
+  font-size: 1.1rem !important;
+  border-radius: 8px !important;
+}
+
+body.high-contrast .dropdown-select:hover,
+body.high-contrast .dropdown-select:focus {
+  background: #ffffff !important;
+  border-color: #000000 !important;
+  box-shadow: 0 0 0 4px #000000 !important;
+  transform: translateY(-1px) !important;
+}
+
+body.high-contrast .dropdown-select option {
+  background: #ffffff !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+  padding: 12px 14px !important;
+  font-size: 1.1rem !important;
+}
+
+body.high-contrast .toggle-input:checked + .toggle-label:hover {
+  background: #333333 !important;
+  border: 1px solid #ffffff !important;
+}
+
+/* Preference Items */
+body.high-contrast .preference-item {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .preference-name {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .preference-desc {
+  color: #000000 !important;
+}
+
+/* Reset Buttons */
+body.high-contrast .reset-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .reset-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Settings Buttons */
+body.high-contrast .settings-action-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .settings-action-btn svg {
+  stroke: #ffffff !important;
+}
+
+body.high-contrast .settings-action-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .settings-action-btn:hover svg {
+  stroke: #000000 !important;
+}
+
+/* Game Mode Items */
+body.high-contrast .game-mode-item {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .game-mode-name {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .game-mode-desc {
+  color: #000000 !important;
+}
+
+body.high-contrast .game-mode-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .game-mode-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Tutorial Elements */
+body.high-contrast .tutorial-popup {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+}
+
+body.high-contrast .tutorial-popup h3 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .tutorial-popup p {
+  color: #000000 !important;
+}
+
+body.high-contrast .tutorial-backdrop {
+  background: rgba(0, 0, 0, 0.95) !important;
+}
+
+body.high-contrast .tutorial-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .tutorial-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Panic Timer Bar */
+body.high-contrast .speed-timer-bar {
+  background: #ffffff !important;
+  border-bottom: 3px solid #000000 !important;
+  height: 12px !important;
+  box-shadow: 0 0 0 1px #000000 !important;
+}
+
+/* Show All Buttons & Control Buttons */
+body.high-contrast #showAllButtons,
+body.high-contrast #settingsButton {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast #showAllButtons span {
+  color: #000000 !important;
+}
+
+body.high-contrast #showAllButtons.active,
+body.high-contrast #showAllButtons:active,
+body.high-contrast #settingsButton.active,
+body.high-contrast #settingsButton:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #showAllButtons.active span {
+  color: #ffffff !important;
+}
+
+/* 2 Player Mode Button */
+body.high-contrast #twoPlayerButton {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast #twoPlayerButton:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #twoPlayerButton.active,
+body.high-contrast #twoPlayerButton:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Compact Utility Buttons (High Scores, Help, Setting) */
+body.high-contrast .compact-util-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .compact-util-btn:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .compact-util-btn.active,
+body.high-contrast .compact-util-btn:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Rules Action Buttons (Classic, Panic, No Mercy) */
+body.high-contrast .rules-action-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .rules-action-btn:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .rules-action-btn.active,
+body.high-contrast .rules-action-btn:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Battle Royale Play Button */
+body.high-contrast #battleRoyaleInfoPlayIcon {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast #battleRoyaleInfoPlayIcon:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #battleRoyaleInfoPlayIcon.active,
+body.high-contrast #battleRoyaleInfoPlayIcon:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Classic 2 Player Start Button */
+body.high-contrast .classic-2p-start-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .classic-2p-start-btn:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .classic-2p-start-btn.active,
+body.high-contrast .classic-2p-start-btn:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Panic 2 Player and No Mercy 2 Player Buttons */
+body.high-contrast #startPanic2PBtn,
+body.high-contrast #startNoMercy2PBtn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast #startPanic2PBtn:hover,
+body.high-contrast #startNoMercy2PBtn:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #startPanic2PBtn.active,
+body.high-contrast #startPanic2PBtn:active,
+body.high-contrast #startNoMercy2PBtn.active,
+body.high-contrast #startNoMercy2PBtn:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Hero Content - Fix blue background in high contrast */
+body.high-contrast .hero-content {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Battle Royale 2P Button */
+body.high-contrast #battleRoyale2PBtn,
+body.high-contrast .battle-royale-hero {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  background-image: none !important;
+  background-gradient: none !important;
+  position: relative !important;
+}
+
+body.high-contrast #battleRoyale2PBtn:hover,
+body.high-contrast .battle-royale-hero:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  background-image: none !important;
+  background-gradient: none !important;
+  transform: none !important;
+}
+
+body.high-contrast #battleRoyale2PBtn.active,
+body.high-contrast #battleRoyale2PBtn:active,
+body.high-contrast .battle-royale-hero.active,
+body.high-contrast .battle-royale-hero:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  background-image: none !important;
+  background-gradient: none !important;
+}
+
+/* Disable shimmer animation in high contrast */
+body.high-contrast #battleRoyale2PBtn::before,
+body.high-contrast .battle-royale-hero::before {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  animation: none !important;
+}
+
+/* Battle Royale content styling - More specific selectors - WHITE TEXT */
+body.high-contrast .battle-royale-content,
+body.high-contrast #battleRoyale2PBtn .battle-royale-content,
+body.high-contrast .battle-royale-hero .battle-royale-content {
+  background: transparent !important;
+  color: #ffffff !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+body.high-contrast .battle-royale-content h3,
+body.high-contrast #battleRoyale2PBtn .battle-royale-content h3,
+body.high-contrast .battle-royale-hero .battle-royale-content h3 {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  font-size: 1.5rem !important;
+  margin: 0.5rem 0 !important;
+}
+
+body.high-contrast .battle-royale-content p,
+body.high-contrast #battleRoyale2PBtn .battle-royale-content p,
+body.high-contrast .battle-royale-hero .battle-royale-content p {
+  color: #ffffff !important;
+  margin: 0 !important;
+  font-size: 1rem !important;
+}
+
+body.high-contrast .battle-royale-content .battle-icon,
+body.high-contrast #battleRoyale2PBtn .battle-royale-content .battle-icon,
+body.high-contrast .battle-royale-hero .battle-royale-content .battle-icon {
+  color: #ffffff !important;
+  font-size: 3rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Hover states for content - More specific selectors - BLACK TEXT ON WHITE */
+body.high-contrast #battleRoyale2PBtn:hover .battle-royale-content,
+body.high-contrast .battle-royale-hero:hover .battle-royale-content {
+  color: #000000 !important;
+  background: transparent !important;
+}
+
+body.high-contrast #battleRoyale2PBtn:hover .battle-royale-content h3,
+body.high-contrast .battle-royale-hero:hover .battle-royale-content h3 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast #battleRoyale2PBtn:hover .battle-royale-content p,
+body.high-contrast .battle-royale-hero:hover .battle-royale-content p {
+  color: #000000 !important;
+}
+
+body.high-contrast #battleRoyale2PBtn:hover .battle-royale-content .battle-icon,
+body.high-contrast .battle-royale-hero:hover .battle-royale-content .battle-icon {
+  color: #000000 !important;
+}
+
+/* Classic 2P Button */
+body.high-contrast #classic2PBtn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast #classic2PBtn:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #classic2PBtn.active,
+body.high-contrast #classic2PBtn:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Panic 2P and No Mercy 2P Mode Items */
+body.high-contrast #panic2PBtn,
+body.high-contrast #noMercy2PBtn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast #panic2PBtn:hover,
+body.high-contrast #noMercy2PBtn:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #panic2PBtn.active,
+body.high-contrast #panic2PBtn:active,
+body.high-contrast #noMercy2PBtn.active,
+body.high-contrast #noMercy2PBtn:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Game Buttons (Higher/Lower) */
+body.high-contrast .buttons button.up,
+body.high-contrast .buttons button.down {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .buttons button.up svg,
+body.high-contrast .buttons button.down svg {
+  fill: #000000 !important;
+}
+
+body.high-contrast .buttons button.up:hover,
+body.high-contrast .buttons button.down:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .buttons button.up:hover svg,
+body.high-contrast .buttons button.down:hover svg {
+  fill: #ffffff !important;
+}
+
+body.high-contrast .buttons button.up:active,
+body.high-contrast .buttons button.down:active {
+  background: #666666 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .buttons button.up:active svg,
+body.high-contrast .buttons button.down:active svg {
+  fill: #ffffff !important;
+}
+
+/* Mobile responsive fixes for game buttons */
+@media (max-width: 480px) {
+  body.high-contrast .buttons button.up,
+  body.high-contrast .buttons button.down {
+    width: 60px !important;
+    height: 60px !important;
+    border: 2px solid #000000 !important;
+  }
+  
+  body.high-contrast .buttons button.up svg,
+  body.high-contrast .buttons button.down svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+/* Highscore Elements */
+body.high-contrast .highscore-row {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+}
+
+body.high-contrast .highscore-row.even-row {
+  background: #f0f0f0 !important;
+}
+
+body.high-contrast .highscore-row.new-entry {
+  background: #ffff00 !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  border: 3px solid #000000 !important;
+}
+
+/* Tab Buttons */
+body.high-contrast .tab-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .tab-btn.active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .tab-btn:hover {
+  background: #f0f0f0 !important;
+  color: #000000 !important;
+}
+
+body.high-contrast .tab-btn.active:hover {
+  background: #333333 !important;
+  color: #ffffff !important;
+}
+
+/* Rules Sections */
+body.high-contrast .rules-section {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-left: 4px solid #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .rules-section-title {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .rules-section-icon {
+  stroke: #000000 !important;
+}
+
+/* Rules Section Content */
+body.high-contrast .rules-section p {
+  color: #000000 !important;
+}
+
+body.high-contrast .rules-section strong {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Tips Section */
+body.high-contrast .tips-section {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .tips-title {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .tips-title svg {
+  stroke: #000000 !important;
+}
+
+body.high-contrast .tip-text {
+  color: #000000 !important;
+}
+
+/* Control Items */
+body.high-contrast .control-item {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .control-icon {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .control-content h4 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .control-content p {
+  color: #000000 !important;
+}
+
+/* Close Buttons */
+body.high-contrast button[aria-label*="Close"],
+body.high-contrast button[aria-label*="close"],
+body.high-contrast button[aria-label*="Stäng"] {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast button[aria-label*="Close"]:hover,
+body.high-contrast button[aria-label*="close"]:hover,
+body.high-contrast button[aria-label*="Stäng"]:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Overlay Buttons */
+body.high-contrast #playAgainBtn,
+body.high-contrast #highscoreBtn,
+body.high-contrast #playAgainWinBtn,
+body.high-contrast #highscoreWinBtn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #playAgainBtn:hover,
+body.high-contrast #highscoreBtn:hover,
+body.high-contrast #playAgainWinBtn:hover,
+body.high-contrast #highscoreWinBtn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Stats Grid */
+body.high-contrast .stats-grid {
+  background: transparent !important;
+  border: none !important;
+}
+
+body.high-contrast .stat-item {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+}
+
+body.high-contrast .stat-value {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .stat-label {
+  color: #000000 !important;
+}
+
+/* Highscore Table Header - Fix visibility in High Contrast Mode */
+body.high-contrast .table-header {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .table-header .col-date,
+body.high-contrast .table-header .col-score,
+body.high-contrast .table-header .col-time {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Highscore Empty State - Fix visibility in High Contrast Mode */
+body.high-contrast .empty-state,
+body.high-contrast .highscore-empty {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .empty-state h3,
+body.high-contrast .highscore-empty h3 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .empty-state p,
+body.high-contrast .highscore-empty p {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Reset Links */
+body.high-contrast .reset-links a {
+  color: #000000 !important;
+  font-weight: 900 !important;
+  text-decoration: underline !important;
+}
+
+body.high-contrast .reset-links a:hover {
+  color: #333333 !important;
+}
+
+/* Game Mode Info */
+body.high-contrast .game-mode-info-section {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+}
+
+body.high-contrast .game-mode-info-section p {
+  color: #000000 !important;
+}
+
+body.high-contrast .mode-title {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .game-mode-icon-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .game-mode-icon-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Game Mode Headers */
+body.high-contrast .game-mode-info-header {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.high-contrast .game-mode-info-header h3 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Game Mode Icon Text */
+body.high-contrast .mode-icon-text {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* SVG Icons */
+body.high-contrast svg {
+  stroke: currentColor !important;
+}
+
+/* Copyright Text */
+body.high-contrast .copyright-text {
+  color: #000000 !important;
+}
+
+body.high-contrast .copyright-text a {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Info Content */
+body.high-contrast .info-content {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .info-content p {
+  color: #000000 !important;
+}
+
+/* Rules Steps */
+body.high-contrast .rules-step {
+  background: #ffffff !important;
+  border: 1px solid #000000 !important;
+}
+
+body.high-contrast .step-number {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .step-title {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .step-description {
+  color: #000000 !important;
+}
+
+/* Mode Stats Explanation */
+body.high-contrast .mode-stats-explanation {
+  background: #ffffff !important;
+  border: 1px solid #000000 !important;
+}
+
+body.high-contrast .mode-stats-explanation p {
+  color: #000000 !important;
+}
+
+body.high-contrast .mode-stats-explanation strong {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Universal Text Color Override */
+body.high-contrast * {
+  color: inherit !important;
+}
+
+/* Force all text to be black or white */
+body.high-contrast,
+body.high-contrast p,
+body.high-contrast span,
+body.high-contrast div,
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast h4,
+body.high-contrast h5,
+body.high-contrast h6,
+body.high-contrast strong,
+body.high-contrast em,
+body.high-contrast i,
+body.high-contrast b {
+  color: #000000 !important;
+}
+
+/* White text for dark backgrounds */
+body.high-contrast .card.lost,
+body.high-contrast .card.lost *,
+body.high-contrast #gameControls button,
+body.high-contrast #gameControls button *,
+body.high-contrast .rules-action-btn,
+body.high-contrast .rules-action-btn *,
+body.high-contrast .reset-btn,
+body.high-contrast .reset-btn *,
+body.high-contrast .settings-action-btn,
+body.high-contrast .settings-action-btn *,
+body.high-contrast .game-mode-btn,
+body.high-contrast .game-mode-btn *,
+body.high-contrast .tutorial-btn,
+body.high-contrast .tutorial-btn *,
+body.high-contrast .toggle-input:checked + .toggle-label:before,
+body.high-contrast .step-number,
+body.high-contrast .step-number *,
+body.high-contrast .control-icon,
+body.high-contrast .control-icon *,
+body.high-contrast .game-mode-icon-btn,
+body.high-contrast .game-mode-icon-btn *,
+body.high-contrast button[aria-label*="Close"],
+body.high-contrast button[aria-label*="close"],
+body.high-contrast button[aria-label*="Stäng"],
+body.high-contrast button[aria-label*="Close"] *,
+body.high-contrast button[aria-label*="close"] *,
+body.high-contrast button[aria-label*="Stäng"] *,
+body.high-contrast #playAgainBtn,
+body.high-contrast #highscoreBtn,
+body.high-contrast #playAgainWinBtn,
+body.high-contrast #highscoreWinBtn,
+body.high-contrast #playAgainBtn *,
+body.high-contrast #highscoreBtn *,
+body.high-contrast #playAgainWinBtn *,
+body.high-contrast #highscoreWinBtn * {
+  color: #ffffff !important;
+}
+
+/* Override any gold/yellow colors */
+body.high-contrast [style*="color: gold"],
+body.high-contrast [style*="color: #FFD700"],
+body.high-contrast [style*="color: #f1c40f"],
+body.high-contrast [style*="color: yellow"] {
+  color: #000000 !important;
+}
+
+/* ===== 2 PLAYER MODE HIGH CONTRAST RULES ===== */
+
+/* 2 Player Mode Overlay Buttons */
+body.high-contrast .two-player-mode-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .two-player-mode-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Override general text color for 2 Player buttons */
+body.high-contrast .two-player-mode-btn * {
+  color: inherit !important;
+}
+
+/* 2 Player Mode Content Areas - Remove unnecessary boxes */
+body.high-contrast .classic-2p-content,
+body.high-contrast .classic-2p-description,
+body.high-contrast .description-content {
+  background: transparent !important;
+  color: #000000 !important;
+  border: none !important;
+}
+
+/* 2 Player Mode Start Button - Remove box around start button */
+body.high-contrast .classic-2p-start-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .classic-2p-start-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .classic-2p-start-btn svg {
+  stroke: #ffffff !important;
+}
+
+body.high-contrast .classic-2p-start-btn:hover svg {
+  stroke: #000000 !important;
+}
+
+/* Player 2 Ready Content - Remove unnecessary boxes */
+body.high-contrast .player2-ready-content,
+body.high-contrast .player2-ready-info {
+  background: transparent !important;
+  color: #000000 !important;
+  border: none !important;
+}
+
+body.high-contrast .player2-ready-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .player2-ready-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .player2-ready-btn svg {
+  stroke: #ffffff !important;
+}
+
+body.high-contrast .player2-ready-btn:hover svg {
+  stroke: #000000 !important;
+}
+
+/* Show Results Content - Remove unnecessary boxes */
+body.high-contrast .show-results-content,
+body.high-contrast .show-results-info {
+  background: transparent !important;
+  color: #000000 !important;
+  border: none !important;
+}
+
+body.high-contrast .show-results-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .show-results-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Two Player Results Content - Remove unnecessary boxes */
+body.high-contrast .two-player-results-content {
+  background: transparent !important;
+  color: #000000 !important;
+  border: none !important;
+}
+
+/* Player Result Boxes - Loser has black border, winner has inverted colors */
+body.high-contrast .player-result {
+  background: transparent !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Winner Box - Inverted colors (black background, white text) */
+body.high-contrast .player-result.winner {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .result-score,
+body.high-contrast .result-time {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Winner result text should be white */
+body.high-contrast .player-result.winner .result-score,
+body.high-contrast .player-result.winner .result-time {
+  color: #ffffff !important;
+}
+
+/* Override general div color for winner result */
+body.high-contrast .player-result.winner div {
+  color: #ffffff !important;
+}
+
+/* Override general div color for winner result in all 2 Player overlays */
+body.high-contrast #classic2POverlay .player-result.winner div,
+body.high-contrast #panic2POverlay .player-result.winner div,
+body.high-contrast #noMercy2POverlay .player-result.winner div,
+body.high-contrast #twoPlayerResultsOverlay .player-result.winner div {
+  color: #ffffff !important;
+}
+
+/* Also override any direct text elements in winner result */
+body.high-contrast .player-result.winner span,
+body.high-contrast .player-result.winner p,
+body.high-contrast .player-result.winner strong,
+body.high-contrast .player-result.winner b,
+body.high-contrast .player-result.winner em,
+body.high-contrast .player-result.winner i {
+  color: #ffffff !important;
+}
+
+/* Override heading colors for winner result boxes */
+body.high-contrast .player-result.winner h1,
+body.high-contrast .player-result.winner h2,
+body.high-contrast .player-result.winner h3,
+body.high-contrast .player-result.winner h4,
+body.high-contrast .player-result.winner h5,
+body.high-contrast .player-result.winner h6 {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+/* Override heading colors for winner result boxes in all 2 Player overlays */
+body.high-contrast #classic2POverlay .player-result.winner h1,
+body.high-contrast #classic2POverlay .player-result.winner h2,
+body.high-contrast #classic2POverlay .player-result.winner h3,
+body.high-contrast #classic2POverlay .player-result.winner h4,
+body.high-contrast #classic2POverlay .player-result.winner h5,
+body.high-contrast #classic2POverlay .player-result.winner h6,
+body.high-contrast #panic2POverlay .player-result.winner h1,
+body.high-contrast #panic2POverlay .player-result.winner h2,
+body.high-contrast #panic2POverlay .player-result.winner h3,
+body.high-contrast #panic2POverlay .player-result.winner h4,
+body.high-contrast #panic2POverlay .player-result.winner h5,
+body.high-contrast #panic2POverlay .player-result.winner h6,
+body.high-contrast #noMercy2POverlay .player-result.winner h1,
+body.high-contrast #noMercy2POverlay .player-result.winner h2,
+body.high-contrast #noMercy2POverlay .player-result.winner h3,
+body.high-contrast #noMercy2POverlay .player-result.winner h4,
+body.high-contrast #noMercy2POverlay .player-result.winner h5,
+body.high-contrast #noMercy2POverlay .player-result.winner h6,
+body.high-contrast #twoPlayerResultsOverlay .player-result.winner h1,
+body.high-contrast #twoPlayerResultsOverlay .player-result.winner h2,
+body.high-contrast #twoPlayerResultsOverlay .player-result.winner h3,
+body.high-contrast #twoPlayerResultsOverlay .player-result.winner h4,
+body.high-contrast #twoPlayerResultsOverlay .player-result.winner h5,
+body.high-contrast #twoPlayerResultsOverlay .player-result.winner h6 {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+/* Play Again Button */
+body.high-contrast .results-play-again-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .results-play-again-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Current Player Text - Make it white */
+body.high-contrast #currentPlayerText {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+/* Close Buttons for 2 Player Overlays */
+body.high-contrast #closeClassic2PBtn,
+body.high-contrast #closePanic2PBtn,
+body.high-contrast #closeNoMercy2PBtn,
+body.high-contrast #closeTwoPlayerResultsBtn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #closeClassic2PBtn:hover,
+body.high-contrast #closePanic2PBtn:hover,
+body.high-contrast #closeNoMercy2PBtn:hover,
+body.high-contrast #closeTwoPlayerResultsBtn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* 2 Player Mode Overlay Backgrounds */
+body.high-contrast #classic2POverlay,
+body.high-contrast #panic2POverlay,
+body.high-contrast #noMercy2POverlay,
+body.high-contrast #twoPlayerResultsOverlay {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* 2 Player Mode Overlay Content */
+body.high-contrast #classic2POverlay .overlayContent,
+body.high-contrast #panic2POverlay .overlayContent,
+body.high-contrast #noMercy2POverlay .overlayContent,
+body.high-contrast #twoPlayerResultsOverlay .overlayContent {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+}
+
+/* 2 Player Mode Overlay Text */
+body.high-contrast #classic2POverlay h2,
+body.high-contrast #panic2POverlay h2,
+body.high-contrast #noMercy2POverlay h2,
+body.high-contrast #twoPlayerResultsOverlay h2,
+body.high-contrast #classic2POverlay h3,
+body.high-contrast #panic2POverlay h3,
+body.high-contrast #noMercy2POverlay h3,
+body.high-contrast #twoPlayerResultsOverlay h3 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast #classic2POverlay .overlaySubtitle,
+body.high-contrast #panic2POverlay .overlaySubtitle,
+body.high-contrast #noMercy2POverlay .overlaySubtitle,
+body.high-contrast #twoPlayerResultsOverlay .overlaySubtitle {
+  color: #000000 !important;
+}
+
+body.high-contrast #classic2POverlay li,
+body.high-contrast #panic2POverlay li,
+body.high-contrast #noMercy2POverlay li,
+body.high-contrast #twoPlayerResultsOverlay li {
+  color: #000000 !important;
+}
+
+/* 2 Player Mode Overlay Lists */
+body.high-contrast #classic2POverlay ul,
+body.high-contrast #panic2POverlay ul,
+body.high-contrast #noMercy2POverlay ul,
+body.high-contrast #twoPlayerResultsOverlay ul {
+  color: #000000 !important;
+}
+
+/* 2 Player Mode Overlay Paragraphs */
+body.high-contrast #classic2POverlay p,
+body.high-contrast #panic2POverlay p,
+body.high-contrast #noMercy2POverlay p,
+body.high-contrast #twoPlayerResultsOverlay p {
+  color: #000000 !important;
+}
+
+/* 2 Player Mode Overlay Spans */
+body.high-contrast #classic2POverlay span,
+body.high-contrast #panic2POverlay span,
+body.high-contrast #noMercy2POverlay span,
+body.high-contrast #twoPlayerResultsOverlay span {
+  color: #000000 !important;
+}
+
+/* 2 Player Mode Overlay Divs */
+body.high-contrast #classic2POverlay div,
+body.high-contrast #panic2POverlay div,
+body.high-contrast #noMercy2POverlay div,
+body.high-contrast #twoPlayerResultsOverlay div {
+  color: #000000 !important;
+}
+
+/* 2 Player Mode Overlay Strong and Bold Text */
+body.high-contrast #classic2POverlay strong,
+body.high-contrast #panic2POverlay strong,
+body.high-contrast #noMercy2POverlay strong,
+body.high-contrast #twoPlayerResultsOverlay strong,
+body.high-contrast #classic2POverlay b,
+body.high-contrast #panic2POverlay b,
+body.high-contrast #noMercy2POverlay b,
+body.high-contrast #twoPlayerResultsOverlay b {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* 2 Player Mode Overlay Em and Italic Text */
+body.high-contrast #classic2POverlay em,
+body.high-contrast #panic2POverlay em,
+body.high-contrast #noMercy2POverlay em,
+body.high-contrast #twoPlayerResultsOverlay em,
+body.high-contrast #classic2POverlay i,
+body.high-contrast #panic2POverlay i,
+body.high-contrast #noMercy2POverlay i,
+body.high-contrast #twoPlayerResultsOverlay i {
+  color: #000000 !important;
+}
+
+/* 2 Player Mode Overlay Headings */
+body.high-contrast #classic2POverlay h1,
+body.high-contrast #panic2POverlay h1,
+body.high-contrast #noMercy2POverlay h1,
+body.high-contrast #twoPlayerResultsOverlay h1,
+body.high-contrast #classic2POverlay h4,
+body.high-contrast #panic2POverlay h4,
+body.high-contrast #noMercy2POverlay h4,
+body.high-contrast #twoPlayerResultsOverlay h4,
+body.high-contrast #classic2POverlay h5,
+body.high-contrast #panic2POverlay h5,
+body.high-contrast #noMercy2POverlay h5,
+body.high-contrast #twoPlayerResultsOverlay h5,
+body.high-contrast #classic2POverlay h6,
+body.high-contrast #panic2POverlay h6,
+body.high-contrast #noMercy2POverlay h6,
+body.high-contrast #twoPlayerResultsOverlay h6 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast #classic2POverlay h6 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Additional 2 Player Mode Elements */
+body.high-contrast .two-player-mode-btn svg {
+  stroke: #ffffff !important;
+}
+
+body.high-contrast .two-player-mode-btn:hover svg {
+  stroke: #000000 !important;
+}
+
+/* 2 Player Mode Overlay Backdrop */
+body.high-contrast #classic2POverlay::before,
+body.high-contrast #panic2POverlay::before,
+body.high-contrast #noMercy2POverlay::before,
+body.high-contrast #twoPlayerResultsOverlay::before {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* 2 Player Mode Overlay Focus States */
+body.high-contrast #classic2POverlay button:focus,
+body.high-contrast #panic2POverlay button:focus,
+body.high-contrast #noMercy2POverlay button:focus,
+body.high-contrast #twoPlayerResultsOverlay button:focus {
+  outline: 3px solid #ffffff !important;
+  outline-offset: 2px !important;
+}
+
+/* ===== INVERTED HIGH CONTRAST MODE ===== */
+/* When BOTH High Contrast AND Night Mode are active - INVERT ALL COLORS */
+
+/* Body Background - Inverted */
+body.high-contrast.dark-mode {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Cards - Inverted */
+body.high-contrast.dark-mode .card {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .card.red {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .card.lost {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.high-contrast.dark-mode .card.selected {
+  box-shadow: 0 0 5px 1px #ffffff !important;
+}
+
+/* Scoreboard - Inverted */
+body.high-contrast.dark-mode #scoreboard {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #scoreboard .label {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode #scoreboard .value {
+  color: #ffffff !important;
+}
+
+/* Game Controls - Inverted */
+body.high-contrast.dark-mode #gameControls button {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #gameControls button:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast.dark-mode #gameControls button.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Overlays - Inverted */
+body.high-contrast.dark-mode .overlayContent {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 3px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .overlayContent h2,
+body.high-contrast.dark-mode .overlayContent h3 {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .overlayTitle {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .overlaySubtitle,
+body.high-contrast.dark-mode .overlayScore,
+body.high-contrast.dark-mode .overlayTime {
+  color: #ffffff !important;
+}
+
+/* Buttons - Inverted */
+body.high-contrast.dark-mode .rules-action-btn,
+body.high-contrast.dark-mode .overlay-buttons button {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .rules-action-btn:hover,
+body.high-contrast.dark-mode .overlay-buttons button:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Highscore Elements - Inverted */
+body.high-contrast.dark-mode .stats-grid {
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .stat-item {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .stat-value {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .stat-label {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .table-header {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .highscore-row {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .tab-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .tab-btn.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* 2 Player Mode Elements - Inverted */
+body.high-contrast.dark-mode .two-player-mode-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .classic-2p-start-btn,
+body.high-contrast.dark-mode .player2-ready-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Inverted High Contrast - Additional Button Rules */
+body.high-contrast.dark-mode #twoPlayerButton {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #twoPlayerButton:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast.dark-mode .compact-util-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .compact-util-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast.dark-mode .rules-action-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .rules-action-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast.dark-mode #battleRoyaleInfoPlayIcon {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #battleRoyaleInfoPlayIcon:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast.dark-mode #startPanic2PBtn,
+body.high-contrast.dark-mode #startNoMercy2PBtn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #startPanic2PBtn:hover,
+body.high-contrast.dark-mode #startNoMercy2PBtn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Inverted High Contrast - Additional Elements */
+body.high-contrast.dark-mode .hero-content {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #battleRoyale2PBtn,
+body.high-contrast.dark-mode .battle-royale-hero {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  background-image: none !important;
+  background-gradient: none !important;
+  position: relative !important;
+}
+
+body.high-contrast.dark-mode #battleRoyale2PBtn:hover,
+body.high-contrast.dark-mode .battle-royale-hero:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  background-image: none !important;
+  background-gradient: none !important;
+  transform: none !important;
+}
+
+/* Disable shimmer animation in inverted high contrast */
+body.high-contrast.dark-mode #battleRoyale2PBtn::before,
+body.high-contrast.dark-mode .battle-royale-hero::before {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  animation: none !important;
+}
+
+/* Battle Royale content styling - Inverted - More specific selectors - BLACK TEXT */
+body.high-contrast.dark-mode .battle-royale-content,
+body.high-contrast.dark-mode #battleRoyale2PBtn .battle-royale-content,
+body.high-contrast.dark-mode .battle-royale-hero .battle-royale-content {
+  background: transparent !important;
+  color: #000000 !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+body.high-contrast.dark-mode .battle-royale-content h3,
+body.high-contrast.dark-mode #battleRoyale2PBtn .battle-royale-content h3,
+body.high-contrast.dark-mode .battle-royale-hero .battle-royale-content h3 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+  font-size: 1.5rem !important;
+  margin: 0.5rem 0 !important;
+}
+
+body.high-contrast.dark-mode .battle-royale-content p,
+body.high-contrast.dark-mode #battleRoyale2PBtn .battle-royale-content p,
+body.high-contrast.dark-mode .battle-royale-hero .battle-royale-content p {
+  color: #000000 !important;
+  margin: 0 !important;
+  font-size: 1rem !important;
+}
+
+body.high-contrast.dark-mode .battle-royale-content .battle-icon,
+body.high-contrast.dark-mode #battleRoyale2PBtn .battle-royale-content .battle-icon,
+body.high-contrast.dark-mode .battle-royale-hero .battle-royale-content .battle-icon {
+  color: #000000 !important;
+  font-size: 3rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Hover states for content - Inverted - More specific selectors - WHITE TEXT */
+body.high-contrast.dark-mode #battleRoyale2PBtn:hover .battle-royale-content,
+body.high-contrast.dark-mode .battle-royale-hero:hover .battle-royale-content {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+body.high-contrast.dark-mode #battleRoyale2PBtn:hover .battle-royale-content h3,
+body.high-contrast.dark-mode .battle-royale-hero:hover .battle-royale-content h3 {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast.dark-mode #battleRoyale2PBtn:hover .battle-royale-content p,
+body.high-contrast.dark-mode .battle-royale-hero:hover .battle-royale-content p {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode #battleRoyale2PBtn:hover .battle-royale-content .battle-icon,
+body.high-contrast.dark-mode .battle-royale-hero:hover .battle-royale-content .battle-icon {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode #classic2PBtn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #classic2PBtn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast.dark-mode #panic2PBtn,
+body.high-contrast.dark-mode #noMercy2PBtn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #panic2PBtn:hover,
+body.high-contrast.dark-mode #noMercy2PBtn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast.dark-mode .player-result {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .player-result.winner {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Settings Elements - Inverted */
+body.high-contrast.dark-mode .toggle-switch .toggle-label {
+  background: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .toggle-switch .toggle-label:before {
+  background: #000000 !important;
+}
+
+body.high-contrast.dark-mode .toggle-input:checked + .toggle-label {
+  background: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .preference-item {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .preference-name {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .preference-desc {
+  color: #ffffff !important;
+}
+
+/* ===== BATTLE ROYALE HIGH CONTRAST MODE ===== */
+
+/* Battle Royale Scoreboard */
+body.high-contrast #battleRoyaleScoreboard {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast .player-name {
+  color: #000000 !important;
+  font-weight: 900 !important;
+  text-shadow: none !important;
+}
+
+body.high-contrast .player-name.inactive {
+  color: #666666 !important;
+  opacity: 1 !important;
+}
+
+body.high-contrast .player-lives {
+  color: #000000 !important;
+  text-shadow: none !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .player-lives.current-player {
+  animation: highContrastHeartGlow 2s ease-in-out infinite;
+}
+
+body.high-contrast .life-lost {
+  color: #cccccc !important;
+  text-decoration: line-through !important;
+  text-shadow: none !important;
+}
+
+/* Battle Royale Overlay */
+body.high-contrast #battleRoyaleOverlay {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+body.high-contrast #battleRoyaleOverlay .overlayContent {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+}
+
+body.high-contrast #battleRoyaleOverlay h2 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast #battleRoyaleOverlay p {
+  color: #000000 !important;
+}
+
+body.high-contrast #battleRoyaleOverlay li {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+body.high-contrast #battleRoyaleOverlay .classic-2p-start-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #battleRoyaleOverlay .classic-2p-start-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Icon Grid in Battle Royale Overlay */
+body.high-contrast #battleRoyaleOverlay .icon-grid {
+  background: transparent !important;
+}
+
+body.high-contrast #battleRoyaleOverlay .icon-item {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast #battleRoyaleOverlay .icon-symbol {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast #battleRoyaleOverlay .icon-text {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast #battleRoyaleOverlay .icon-detail {
+  color: #000000 !important;
+}
+
+/* Start Button in Battle Royale Overlay */
+body.high-contrast #startBattleRoyaleBtn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #startBattleRoyaleBtn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Battle Royale Results Overlay */
+body.high-contrast #battleRoyaleResultsOverlay {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+body.high-contrast #battleRoyaleResultsOverlay .overlayContent {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+}
+
+body.high-contrast #battleRoyaleResultsOverlay .victory-crown {
+  color: #000000 !important;
+}
+
+body.high-contrast #battleRoyaleResultsOverlay .victory-title {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast #battleRoyaleResultsOverlay .victory-subtitle {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast #battleRoyaleResultsOverlay .winner-display {
+  background: transparent !important;
+}
+
+body.high-contrast #battleRoyaleResultsOverlay .winner-player {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast #battleRoyaleResultsOverlay .winner-name {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Disable animations in high contrast */
+body.high-contrast .button-glow-gold {
+  animation: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+body.high-contrast .card-life-bonus {
+  color: #000000 !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+body.high-contrast .card-equal-text {
+  color: #000000 !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+body.high-contrast .wrong-guess-cross {
+  color: #000000 !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+body.high-contrast .card.red-flash {
+  animation: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Battle Royale Overlay */
+body.high-contrast #battleRoyaleOverlay {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+body.high-contrast #battleRoyaleOverlay .overlayContent {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+}
+
+body.high-contrast #battleRoyaleOverlay h2 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast #battleRoyaleOverlay p {
+  color: #000000 !important;
+}
+
+body.high-contrast #battleRoyaleOverlay li {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+body.high-contrast #battleRoyaleOverlay .classic-2p-start-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #battleRoyaleOverlay .classic-2p-start-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Button glow effects in high contrast */
+body.high-contrast .button-glow-gold {
+  animation: highContrastGoldGlow 2s ease-in-out infinite;
+}
+
+body.high-contrast .button-glow-blue {
+  animation: highContrastBlueGlow 2s ease-in-out infinite;
+}
+
+@keyframes highContrastGoldGlow {
+  0%, 100% { 
+    box-shadow: 0 0 15px #000000; 
+    border: 3px solid #000000 !important;
+  }
+  50% { 
+    box-shadow: 0 0 25px #000000; 
+    border: 4px solid #000000 !important;
+  }
+}
+
+@keyframes highContrastBlueGlow {
+  0%, 100% { 
+    box-shadow: 0 0 15px #000000; 
+    border: 3px solid #000000 !important;
+  }
+  50% { 
+    box-shadow: 0 0 25px #000000; 
+    border: 4px solid #000000 !important;
+  }
+}
+
+@keyframes highContrastHeartGlow {
+  0%, 100% { 
+    text-shadow: 0 0 5px #000000;
+    transform: scale(1);
+  }
+  50% { 
+    text-shadow: 0 0 10px #000000;
+    transform: scale(1.1);
+  }
+}
+
+/* Battle Royale close button */
+body.high-contrast #closeBattleRoyaleBtn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #closeBattleRoyaleBtn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* 2 Player mode button for Battle Royale */
+body.high-contrast #battleRoyale2PBtn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast #battleRoyale2PBtn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast #battleRoyale2PBtn .mode-icon-text {
+  color: #ffffff !important;
+}
+
+body.high-contrast #battleRoyale2PBtn:hover .mode-icon-text {
+  color: #000000 !important;
+}
+
+/* Card life bonus in high contrast */
+body.high-contrast .card-life-bonus {
+  color: #000000 !important;
+  text-shadow: 0 0 5px #ffffff !important;
+  font-weight: 900 !important;
+}
+
+/* Strategy Items in Battle Royale */
+body.high-contrast .strategy-item {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  border-radius: 8px !important;
+}
+
+body.high-contrast .strategy-card {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+  box-shadow: none !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .strategy-card.red {
+  color: #000000 !important;
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .strategy-plus {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .strategy-action {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .strategy-result {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast .strategy-result .heart {
+  color: #000000 !important;
+}
+
+body.high-contrast .arrow-up,
+body.high-contrast .arrow-down {
+  color: #000000 !important;
+}
+
+/* INVERTED HIGH CONTRAST (high-contrast + dark-mode) */
+
+/* Battle Royale Scoreboard - Inverted */
+body.high-contrast.dark-mode #battleRoyaleScoreboard {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 3px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .player-name {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .player-name.inactive {
+  color: #999999 !important;
+}
+
+body.high-contrast.dark-mode .player-lives {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .life-lost {
+  color: #333333 !important;
+}
+
+/* Battle Royale Overlay - Inverted */
+body.high-contrast.dark-mode #battleRoyaleOverlay .overlayContent {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 3px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #battleRoyaleOverlay h2,
+body.high-contrast.dark-mode #battleRoyaleOverlay p,
+body.high-contrast.dark-mode #battleRoyaleOverlay li {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode #battleRoyaleOverlay .classic-2p-start-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #battleRoyaleOverlay .classic-2p-start-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Buttons - Inverted */
+body.high-contrast.dark-mode #closeBattleRoyaleBtn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #battleRoyale2PBtn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .card-life-bonus {
+  color: #ffffff !important;
+  text-shadow: 0 0 5px #000000 !important;
+}
+
+/* Strategy Items in Battle Royale - Inverted */
+body.high-contrast.dark-mode .strategy-item {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 8px !important;
+}
+
+body.high-contrast.dark-mode .strategy-card {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: none !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast.dark-mode .strategy-card.red {
+  color: #ffffff !important;
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .strategy-plus {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast.dark-mode .strategy-action {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast.dark-mode .strategy-result {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+body.high-contrast.dark-mode .strategy-result .heart {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .arrow-up,
+body.high-contrast.dark-mode .arrow-down {
+  color: #ffffff !important;
+}
+
+/* Additional Highscore List Elements - Inverted */
+body.high-contrast.dark-mode .highscore-list {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .highscore-row .col-date,
+body.high-contrast.dark-mode .highscore-row .col-score,
+body.high-contrast.dark-mode .highscore-row .col-time {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .highscore-row.top3 {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .highscore-row.top3 .col-date,
+body.high-contrast.dark-mode .highscore-row.top3 .col-score,
+body.high-contrast.dark-mode .highscore-row.top3 .col-time {
+  color: #ffffff !important;
+}
+
+/* Reset Links - Inverted */
+body.high-contrast.dark-mode .reset-links {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-top: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .reset-links a {
+  color: #ffffff !important;
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .reset-links a:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Game Rules Titles - Inverted */
+body.high-contrast.dark-mode .rules-section h3,
+body.high-contrast.dark-mode .rules-section h4,
+body.high-contrast.dark-mode .rules-section h5,
+body.high-contrast.dark-mode .rules-section h6 {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .rules-section strong,
+body.high-contrast.dark-mode .rules-section b {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .rules-section p {
+  color: #ffffff !important;
+}
+
+/* Help Overlay - Inverted */
+body.high-contrast.dark-mode #helpOverlay .overlayContent {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 3px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode #helpOverlay .overlayTitle {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode #helpOverlay .rules-section {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Game Rules Icons - Inverted */
+body.high-contrast.dark-mode .rules-section svg,
+body.high-contrast.dark-mode #helpOverlay svg {
+  stroke: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* Pro Tips Title - Inverted */
+body.high-contrast.dark-mode .pro-tips-title,
+body.high-contrast.dark-mode .tips-title,
+body.high-contrast.dark-mode .rules-section h2 {
+  color: #ffffff !important;
+  background: #000000 !important;
+}
+
+/* Game Controls Text - Inverted */
+body.high-contrast.dark-mode #gameControls button span,
+body.high-contrast.dark-mode #gameControls button svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+body.high-contrast.dark-mode #gameControls button:hover span,
+body.high-contrast.dark-mode #gameControls button:hover svg {
+  color: #000000 !important;
+  stroke: #000000 !important;
+  fill: #000000 !important;
+}
+
+body.high-contrast.dark-mode #gameControls button.active span,
+body.high-contrast.dark-mode #gameControls button.active svg {
+  color: #000000 !important;
+  stroke: #000000 !important;
+  fill: #000000 !important;
+}
+
+/* Game Controls Text Under Buttons - Inverted */
+body.high-contrast.dark-mode #gameControls button::after,
+body.high-contrast.dark-mode #gameControls button::before {
+  color: #000000 !important;
+}
+
+/* Game Controls Button Text - Inverted */
+body.high-contrast.dark-mode #gameControls button {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode #gameControls button span {
+  color: #ffffff !important;
+}
+
+/* Empty State in Highscore - Inverted */
+body.high-contrast.dark-mode .empty-state,
+body.high-contrast.dark-mode .highscore-empty {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast.dark-mode .empty-state h3,
+body.high-contrast.dark-mode .highscore-empty h3 {
+  color: #000000 !important;
+}
+
+body.high-contrast.dark-mode .empty-state p,
+body.high-contrast.dark-mode .highscore-empty p {
+  color: #000000 !important;
+}
+
+/* Highscore Table Content - Inverted */
+body.high-contrast.dark-mode .highscore-table {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast.dark-mode .highscore-table .table-header {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .highscore-table .table-header div {
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .highscore-table .highscore-row {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+body.high-contrast.dark-mode .highscore-table .highscore-row div {
+  color: #ffffff !important;
+}
+
+/* Force all text in highscore table to be white */
+body.high-contrast.dark-mode #highscoreList *,
+body.high-contrast.dark-mode .highscore-table * {
+  color: #ffffff !important;
+}
+
+/* Specific override for any remaining black text */
+body.high-contrast.dark-mode .highscore-row .col-date,
+body.high-contrast.dark-mode .highscore-row .col-score,
+body.high-contrast.dark-mode .highscore-row .col-time,
+body.high-contrast.dark-mode .table-header .col-date,
+body.high-contrast.dark-mode .table-header .col-score,
+body.high-contrast.dark-mode .table-header .col-time {
+  color: #ffffff !important;
+}
+
+

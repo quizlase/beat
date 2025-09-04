@@ -1,0 +1,3273 @@
+.tips-list li:last-child {
+  margin-bottom: 0;
+}* {
+  box-sizing: border-box;
+}
+
+/* Panic Mode Timer Bar */
+.speed-timer-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: #FFD700;
+  z-index: 1001;
+  transition: width 0.1s linear;
+  display: none;
+}
+
+.speed-timer-bar.active {
+  display: block;
+}
+
+body {
+  background: #2c3e50;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  user-select: none;
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #17212a;
+}
+
+body.dark-mode .card {
+  background-color: #2c3e50;
+  color: #f5f5dc !important;
+}
+
+body.dark-mode .card.red {
+  color: #f5f5dc !important;
+}
+
+body.dark-mode .buttons button.up,
+body.dark-mode .buttons button.down {
+  background-color: #17212a !important;
+}
+
+body.dark-mode .card.lost {
+  background-color: #020304 !important;
+  color: #888 !important;
+}
+
+body.dark-mode .card.selected {
+  box-shadow: 0 0 5px 1px #85a0bc;
+}
+
+/* Tutorial Elements */
+.tutorial-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 500;
+  pointer-events: none;
+}
+
+.tutorial-popup {
+  position: fixed;
+  background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 300px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 2px solid #FFD700;
+  z-index: 1001;
+  transition: all 0.3s ease;
+}
+
+.tutorial-popup h3 {
+  color: #FFD700;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.tutorial-popup p {
+  color: #f5f5dc;
+  line-height: 1.4;
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+}
+
+.tutorial-popup-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+.tutorial-btn {
+  background: #2980b9;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.tutorial-btn:hover {
+  background: #3498db;
+}
+
+.tutorial-btn.back {
+  background: #2c3e50;
+  border: 2px solid #3498db;
+  color: #3498db;
+}
+
+.tutorial-btn.back:hover {
+  background: #34495e;
+  border-color: #5dade2;
+  color: #5dade2;
+}
+
+.tutorial-step-counter {
+  background: rgba(52, 73, 94, 0.8);
+  border: 1px solid #85a0bc;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: #f5f5dc;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.tutorial-arrow {
+  position: fixed;
+  z-index: 1000;
+  animation: bounce 2s infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(-8px) scale(1.1);
+  }
+  60% {
+    transform: translateY(-4px) scale(1.05);
+  }
+}
+
+.tutorial-overlay-card {
+  background: #f5f5dc;
+  border-radius: 8px;
+  box-shadow: 0 0 25px 8px #FFD700;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6px;
+  color: black;
+  font-weight: 700;
+  transform: scale(1.08);
+  animation: glow 2s ease-in-out infinite;
+  width: 100px;
+}
+
+.tutorial-overlay-card.lost {
+  background-color: #222 !important;
+  box-shadow: 0 0 25px 8px #FFD700 !important;
+  transform: scale(1.08) !important;
+  animation: glow 2s ease-in-out infinite !important;
+}
+
+.tutorial-overlay-card.lost-glow {
+  box-shadow: 0 0 30px 10px #FFD700, 0 0 50px 15px rgba(255, 215, 0, 0.6) !important;
+  animation: glow 2s ease-in-out infinite !important;
+}
+
+.tutorial-overlay-card.lost-glow {
+    box-shadow: 0 0 30px 10px #FFD700, 0 0 50px 15px rgba(255, 215, 0, 0.6) !important;
+    animation: glow 2s ease-in-out infinite !important;
+}
+
+.tutorial-overlay-card .lost-card {
+  color: #888 !important;
+  font-weight: 900;
+  font-size: 3rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 25px 8px #FFD700; }
+  50% { box-shadow: 0 0 35px 12px #FFD700; }
+}
+
+#tutorialOverlayScore {
+  box-shadow: 0 0 20px 5px #FFD700;
+  border-radius: 8px;
+  padding: 4px 8px;
+  background: rgba(44, 62, 80, 0.8);
+}
+
+#tutorialOverlaySettings {
+  box-shadow: 0 0 20px 5px #FFD700 !important;
+  background: #34495e;
+  border: none;
+  color: #f5f5dc;
+  font-size: 28px;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.15s;
+}
+
+.tutorial-pulse-buttons .up,
+.tutorial-pulse-buttons .down {
+  animation: pulse-button 1.2s ease-in-out infinite !important;
+}
+
+@keyframes pulse-button {
+  0% { 
+    transform: scale(1);
+  }
+  50% { 
+    transform: scale(1.2);
+  }
+  100% { 
+    transform: scale(1);
+  }
+}
+
+.tutorial-popup.top-left {
+  top: 20px;
+  left: 20px;
+}
+
+.tutorial-popup.top-right {
+  top: 20px;
+  right: 20px;
+}
+
+.tutorial-popup.top-center {
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tutorial-popup.bottom-center {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tutorial-popup.center-right {
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+#gameWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+#scoreboard {
+  display: flex;
+  justify-content: space-between;
+  width: 320px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  flex-wrap: wrap;
+}
+
+#score {
+  flex: 0 0 48%;
+  order: 1;
+}
+
+#deckCounter {
+  flex: 0 0 48%;
+  order: 2;
+  text-align: right;
+}
+
+#timer {
+  flex: 0 0 40%;
+  order: 3;
+  font-weight: 400;
+}
+
+#gameMode {
+  flex: 0 0 56%;
+  order: 4;
+  text-align: right;
+  font-weight: 400;
+}
+
+#score .label,
+#deckCounter .label {
+  color: #f5f5dc;
+}
+
+#score .value,
+#deckCounter .value {
+  color: gold;
+  font-size: 1.6rem;
+}
+
+#gameMode .label,
+#timer .label {
+  color: #f5f5dc;
+  font-size: 0.9rem;
+}
+
+#gameMode .value,
+#timer .value {
+  color: #f5f5dc;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+#cardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 15px;
+  margin-bottom: 15px;
+}
+
+.card {
+  background: #f5f5dc;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  position: relative;
+  cursor: pointer;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6px;
+  color: black;
+  font-weight: 700;
+  user-select: none;
+  transition: box-shadow 0.3s, transform 0.3s, background-color 0.3s, color 0.3s;
+  font-family: 'Arial', 'sans-serif', 'Segoe UI';
+}
+
+.card.red {
+  color: #c0392b;
+}
+
+.card.selected {
+  box-shadow: 0 0 10px 3px #85a0bc;
+  z-index: 5;
+}
+
+.top-left {
+  font-size: 1.3rem;
+}
+
+.bottom-right {
+  font-size: 1.3rem;
+  align-self: flex-end;
+}
+
+.buttons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+}
+
+button.up,
+button.down {
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #2c3e50;
+  color: #f5f5dc;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  user-select: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+button.up svg,
+button.down svg {
+  width: 20px;
+  height: 20px;
+  fill: #f5f5dc;
+  transition: fill 0.2s;
+}
+
+button.up:active,
+button.down:active {
+  background-color: #090d11;
+}
+
+button.up:active svg,
+button.down:active svg {
+  fill: gold;
+}
+
+.card.lost {
+  background-color: #222 !important;
+  position: relative;
+  cursor: default;
+  box-shadow: none !important;
+}
+
+.card.lost .lost-card {
+  color: #888 !important;
+  font-weight: 900;
+  font-size: 3rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.card.shake {
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+#gameControls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+}
+
+#restartButton,
+#darkModeButton,
+#showAllButtons,
+#settingsButton,
+#twoPlayerButton {
+  background: #34495e;
+  border: none;
+  color: #f5f5dc;
+  font-size: 28px;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  transition: background-color 0.15s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  line-height: 1;
+}
+
+#showAllButtons span {
+  font-weight: 300;
+}
+
+#darkModeButton svg,
+#settingsButton svg {
+  width: 24px;
+  height: 24px;
+}
+
+#showAllButtons span {
+  font-size: 26px;
+}
+
+#restartButton:active {
+  background-color: #1e2a37;
+}
+
+#darkModeButton.active,
+#darkModeButton:active,
+#showAllButtons.active,
+#showAllButtons:active,
+#settingsButton.active,
+#settingsButton:active,
+#twoPlayerButton:active {
+  background-color: #2980b9;
+}
+
+#twoPlayerButton:active {
+  background-color: #1e2a37;
+}
+
+/* OVERLAY STYLING */
+#gameOverOverlay,
+#winOverlay,
+#helpOverlay,
+#highscoreOverlay,
+#settingsOverlay,
+#infoOverlay,
+#gameModesOverlay,
+#twoPlayerOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  color: #f5f5dc;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.overlayContent {
+  position: relative;
+  background: #34495e;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px 6px rgba(85, 120, 160, 0.7);
+  color: #f5f5dc;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-height: 90vh;
+  max-width: 90vw;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 998;
+  overflow-y: auto;
+}
+
+.game-over-content {
+  text-align: center;
+  align-items: center;
+}
+
+.overlayContent > * {
+  margin: 0;
+}
+
+.overlayContent h2 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  color: gold;
+}
+
+/* Mobile responsive - screens under 400px */
+@media (max-width: 399px) {
+  .overlayContent h2 {
+    font-size: 2.2rem;
+  }
+}
+
+.overlaySubtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: gold;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.overlay-stats {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 250px;
+  margin-bottom: 1.5rem;
+  margin-top: -0.5rem;
+}
+
+.overlayScore,
+.overlayTime {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #f5f5dc;
+  margin-bottom: 0.5rem;
+}
+
+.overlayScore span,
+.overlayTime span {
+  color: gold;
+}
+
+.overlay-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.overlay-buttons button {
+  background: #1e2a37;
+  border: none;
+  padding: 18px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  color: #f5f5dc;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bold;
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.overlay-buttons button:hover {
+  background-color: #2c3e50;
+}
+
+/* Ikoner i overlay-knappar */
+.overlay-buttons .button-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.overlay-buttons button:hover .button-icon {
+  transform: scale(1.1);
+}
+
+.pulse-highscore {
+  animation: pulseHighscore 1.2s infinite !important;
+  background: #1e2a37 !important;
+}
+
+.top3-achievement {
+  background: linear-gradient(45deg, #FFD700, #FFDC00, #FFD700) !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  animation: goldGlowPulse 1.2s infinite !important;
+}
+
+.top3-achievement:hover {
+  background: linear-gradient(45deg, #FFD700, #FFDC00, #FFD700) !important;
+}
+
+@keyframes goldGlowPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.8); }
+  30% { box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.3); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+@keyframes pulseHighscore {
+  0% { box-shadow: 0 0 0 0 rgba(133, 160, 188, 0.8); }
+  30% { box-shadow: 0 0 0 6px rgba(133, 160, 188, 0.3); }
+  70% { box-shadow: 0 0 0 10px rgba(133, 160, 188, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(133, 160, 188, 0); }
+}
+
+.card.pulse {
+  animation: pulse 0.1s ease-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Game Mode Info Overlay */
+.game-mode-info-section {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #1e2a37;
+  border-radius: 8px;
+  border-left: 4px solid #85a0bc;
+}
+
+.game-mode-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.mode-title {
+  color: gold;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mode-icon {
+  width: 20px;
+  height: 20px;
+  stroke: gold;
+  flex-shrink: 0;
+}
+
+.mode-icon-text {
+  font-size: 20px;
+  color: gold;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.game-mode-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.game-mode-icon-btn {
+  background: #34495e;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  color: #f5f5dc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.game-mode-icon-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.game-mode-icon-btn:hover {
+  background-color: #34495e;
+}
+
+.game-mode-icon-btn.play-icon-btn:hover {
+  background-color: #2980b9;
+}
+
+.game-mode-icon-btn.trophy-icon-btn:hover {
+  background-color: #2980b9;
+}
+
+.game-mode-info-section p {
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+  color: #f5f5dc;
+}
+
+.mode-stats-explanation {
+  background: #2c3e50;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.mode-stats-explanation p {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #f5f5dc;
+}
+
+.mode-stats-explanation p:last-child {
+  margin-bottom: 0;
+}
+
+.mode-stats-explanation strong {
+  color: #85a0bc;
+}
+
+/* Highscore overlay styling */
+#highscoreOverlay .overlayContent {
+  max-width: 500px;
+  width: 90vw;
+  align-items: center;
+  max-height: 95vh;
+}
+
+.highscore-tabs {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 400px;
+  flex-wrap: nowrap;
+}
+
+.tab-btn {
+  flex: 1;
+  background: #2c3e50;
+  border: none;
+  padding: 12px 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  color: #f5f5dc;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: normal;
+  border: 2px solid transparent;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.tab-btn:hover {
+  background-color: #34495e;
+}
+
+.tab-btn.active {
+  background-color: #1e2a37;
+  border-color: gold;
+  color: gold;
+  font-weight: bold;
+}
+
+.highscore-stats {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.stat-item {
+  background: #2c3e50;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #34495e;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: gold;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #f5f5dc;
+  letter-spacing: 0.5px;
+}
+
+.highscore-table {
+  background: #2c3e50;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  background: #1e2a37;
+  padding: 12px 0;
+  font-weight: bold;
+  color: gold;
+  text-align: center;
+  font-size: 16px;
+}
+
+.col-date,
+.col-score,
+.col-time {
+  padding: 0 8px;
+}
+
+#highscoreList {
+  max-height: none;
+  overflow-y: visible;
+}
+
+.highscore-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 12px 0;
+  border-bottom: 1px solid #34495e;
+  text-align: center;
+  color: #f5f5dc;
+  transition: background-color 0.2s;
+}
+
+.highscore-row:hover {
+  background: #34495e;
+}
+
+.highscore-row:last-child {
+  border-bottom: none;
+}
+
+.highscore-row.new-record {
+  background: rgba(255, 215, 0, 0.1);
+  color: gold;
+  font-weight: bold;
+}
+
+.highscore-row.new-entry {
+  background: rgba(85, 160, 188, 0.3);
+  color: #f5f5dc;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(85, 160, 188, 0.5);
+}
+
+.highscore-row.new-entry .col-date,
+.highscore-row.new-entry .col-score,
+.highscore-row.new-entry .col-time {
+  font-weight: bold;
+}
+
+.highscore-row.even-row {
+  background: rgba(52, 73, 94, 0.5);
+}
+
+.rank {
+  font-weight: bold;
+  color: gold;
+  margin-right: 8px;
+}
+
+.col-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rank-section {
+  display: flex;
+  align-items: center;
+  min-width: 50px;
+  justify-content: flex-start;
+}
+
+.rank-number {
+  font-weight: bold;
+  color: gold;
+  min-width: 20px;
+}
+
+.rank-emoji {
+  min-width: 20px;
+  text-align: center;
+}
+
+.date-text {
+  flex: 1;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+  font-style: italic;
+}
+
+#closeOverlayBtn,
+#closeHelpOverlayBtn,
+#closeWinOverlayBtn,
+#closeHighscoreBtn,
+#closeSettingsBtn,
+#closeInfoOverlayBtn,
+#closeGameModesBtn,
+#closeTwoPlayerBtn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #f5f5dc;
+  font-size: 48px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 1001;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+#closeOverlayBtn:hover,
+#closeHelpOverlayBtn:hover,
+#closeWinOverlayBtn:hover,
+#closeHighscoreBtn:hover,
+#closeSettingsBtn:hover,
+#closeInfoOverlayBtn:hover,
+#closeGameModesBtn:hover,
+#closeTwoPlayerBtn:hover {
+  color: gold;
+  outline: none;
+}
+
+/* Settings overlay styling */
+.settings-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.preferences-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.preferences-title {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 1rem 0 !important;
+  color: gold !important;
+  text-align: center !important;
+  padding: 0 !important;
+}
+
+.preferences-list {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.preference-item {
+  background: #1e2a37;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #34495e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.preference-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.preference-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: gold;
+}
+
+.preference-desc {
+  font-size: 0.8rem;
+  color: #f5f5dc;
+  opacity: 0.8;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #34495e;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-label:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #f5f5dc;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-input:checked + .toggle-label {
+  background-color: gold;
+}
+
+.toggle-input:checked + .toggle-label:before {
+  transform: translateX(26px);
+}
+
+.toggle-label:hover {
+  background-color: #2c3e50;
+}
+
+.toggle-input:checked + .toggle-label:hover {
+  background-color: #f1c40f;
+}
+
+/* Dropdown styling för Panic Timer */
+.dropdown-switch {
+  position: relative;
+  min-width: 60px;
+  flex-shrink: 0;
+}
+
+.dropdown-select {
+  background: linear-gradient(135deg, #34495e, #2c3e50);
+  border: 2px solid #4a6b8a;
+  border-radius: 8px;
+  color: #f5f5dc;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  min-width: 80px;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f5f5dc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-select:hover {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  border-color: gold;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-select:focus {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  border-color: gold;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.dropdown-select option {
+  background: #34495e;
+  color: #f5f5dc;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.dropdown-select option:hover {
+  background: #2c3e50;
+  color: gold;
+}
+
+.reset-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.reset-btn {
+  width: 100%;
+  background: #1e2a37;
+  border: none;
+  padding: 18px 16px;
+  font-size: 18px;
+  border-radius: 8px;
+  color: #f5f5dc;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.reset-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: #f5f5dc;
+  flex-shrink: 0;
+}
+
+.reset-btn:hover {
+  background-color: #2c3e50;
+}
+
+.settings-action-btn {
+  background: #1e2a37;
+  border: none;
+  padding: 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  color: #f5f5dc;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 60px;
+  box-sizing: border-box;
+  min-width: 0;
+  flex: 1;
+}
+
+.settings-action-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: #f5f5dc;
+  flex-shrink: 0;
+}
+
+.settings-action-btn:hover {
+  background-color: #2c3e50;
+}
+
+.settings-buttons {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 400px;
+  align-items: center;
+  justify-content: stretch;
+}
+
+
+
+.two-player-settings-btn:hover {
+  background-color: #2980b9;
+}
+
+.highscore-btn:hover {
+  background-color: #2980b9;
+}
+
+.rules-btn:hover {
+  background-color: #2980b9;
+}
+
+.settings-btn:hover {
+  background-color: #2980b9;
+}
+
+.game-modes-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.game-modes-title {
+  font-size: 2rem !important;
+  font-weight: 900 !important;
+  margin: 0 0 0.5rem 0 !important;
+  color: #f5f5dc !important;
+  text-align: center !important;
+  padding: 0 !important;
+}
+
+.game-modes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Hero Card - 2 Player Mode */
+.hero-card {
+  background: linear-gradient(135deg, #1e2a37 0%, #2c3e50 100%);
+  border: 2px solid #FFD700;
+  border-radius: 12px;
+  padding: 1.5rem 1.2rem;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 100px;
+}
+
+.hero-card:hover {
+  border-color: #FFA500;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+/* Shimmer animation för Hero Card - använder samma som two-player.css */
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,215,0,0.1), transparent);
+  animation: shimmer 3s infinite;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  text-align: center;
+}
+
+.hero-icon {
+  flex-shrink: 0;
+}
+
+.hero-icon svg {
+  width: 40px;
+  height: 40px;
+  stroke: #FFD700;
+}
+
+.hero-text {
+  text-align: center;
+}
+
+.hero-text h3 {
+  color: #FFD700;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 0 0.2rem 0;
+}
+
+.hero-text p {
+  color: #f5f5dc;
+  font-size: 0.85rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* 3-columns grid för game modes */
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+/* Game mode items ska vara klickbara */
+.modes-grid .game-mode-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modes-grid .game-mode-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+/* Compact utility row */
+.compact-utils-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  width: 100%;
+}
+
+.compact-util-btn {
+  background: #2980b9;
+  border: none;
+  border-radius: 6px;
+  padding: 1rem 0.4rem;
+  color: #f5f5dc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+  min-height: 80px;
+  justify-content: center;
+}
+
+.compact-util-btn:hover {
+  background: #3498db;
+  transform: translateY(-1px);
+}
+
+.compact-util-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+.compact-util-btn span {
+  font-size: 0.75rem;
+  line-height: 1.1;
+}
+
+
+
+.game-mode-item {
+  background: #1e2a37;
+  border-radius: 8px;
+  padding: 20px 12px 16px 12px;
+  text-align: center;
+  border: 1px solid #34495e;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 100px;
+}
+
+.game-mode-icon {
+  width: 28px;
+  height: 28px;
+  stroke: gold;
+  margin: 0 auto 4px auto;
+  flex-shrink: 0;
+}
+
+.game-mode-icon-text {
+  font-size: 28px;
+  color: gold;
+  margin: 0 auto 4px auto;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.game-mode-name {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: gold;
+  margin-bottom: 2px;
+}
+
+.game-mode-desc {
+  display: block;
+  font-size: 0.75rem;
+  color: #f5f5dc;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.game-mode-btn {
+  background: #34495e;
+  border: none;
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  color: #f5f5dc;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bold;
+  margin-top: auto;
+}
+
+.game-mode-btn:hover {
+  background-color: #2c3e50;
+}
+
+.game-mode-btn.active {
+  background-color: #2980b9;
+}
+
+.reset-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 1.2rem;
+  margin-bottom: 0;
+  align-self: center;
+  width: 100%;
+  max-width: 300px;
+}
+
+.reset-links a {
+  color: #5f83a7;
+  font-size: 0.8rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.reset-links a:hover {
+  color: #85a0bc;
+}
+
+/* Info overlay styling */
+.info-content {
+  padding: 0 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.info-content p {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+#infoOverlay .overlayTitle {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  color: #f5f5dc;
+  padding: 0 1rem;
+}
+
+.rules,
+.icon-meanings {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #f5f5dc;
+}
+
+.icon-meanings p {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 480px) {
+  #timer {
+    flex: 0 0 35%;
+  }
+  
+  #gameMode {
+    flex: 0 0 61%;
+  }
+  
+  #gameMode .value,
+  #timer .value {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  #timer {
+    flex: 0 0 30%;
+  }
+  
+  #gameMode {
+    flex: 0 0 66%;
+  }
+  
+  #gameMode .value,
+  #timer .value {
+    font-size: 0.75rem;
+  }
+  
+  /* Hero Card mobile adjustments */
+  .hero-card {
+    padding: 0.8rem 0.6rem;
+    margin-bottom: 0.1rem;
+    min-height: 70px;
+  }
+  
+  .hero-content {
+    gap: 0.4rem;
+  }
+  
+  .hero-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .hero-text h3 {
+    font-size: 1.3rem;
+  }
+  
+  .hero-text p {
+    font-size: 0.7rem;
+  }
+  
+  /* 3-columns grid mobile adjustments */
+  .modes-grid {
+    gap: 1px;
+    margin-bottom: 0.1rem;
+  }
+  
+  .modes-grid .game-mode-item {
+    padding: 20px 12px 16px 12px;
+    min-height: 100px;
+  }
+  
+  .modes-grid .game-mode-name {
+    font-size: 0.55rem;
+  }
+  
+  .modes-grid .game-mode-desc {
+    font-size: 0.55rem;
+  }
+  
+  /* Compact utility buttons mobile */
+  .compact-utils-row {
+    gap: 1px;
+  }
+  
+  .compact-util-btn {
+    padding: 0.5rem 0.1rem;
+    gap: 0.2rem;
+    min-height: 50px;
+    font-size: 0.55rem;
+  }
+  
+  .compact-util-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .compact-util-btn span {
+    font-size: 0.55rem;
+  }
+}
+
+.gold-text {
+  color: gold;
+}
+
+.rules-buttons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 2rem;
+  align-items: center;
+}
+
+.play-btn {
+  flex: 1;
+  min-width: 0;
+}
+
+.about-modes-btn {
+  flex: 2;
+  min-width: 0;
+}
+
+.rules-action-btn {
+  background: #1e2a37;
+  border: 2px solid #34495e;
+  font-size: 16px;
+  border-radius: 8px;
+  color: #f5f5dc;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 56px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  line-height: 1;
+}
+
+.rules-action-btn:hover {
+  background-color: #2c3e50;
+  border-color: gold;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.rules-action-btn.primary {
+  background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+  border-color: #3498db;
+}
+
+.rules-action-btn.primary:hover {
+  background: linear-gradient(135deg, #3498db 0%, #5dade2 100%);
+  border-color: #5dade2;
+}
+
+.rules-action-btn.gold {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  border-color: #FFD700;
+  color: #000;
+}
+
+.rules-action-btn.gold:hover {
+  background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+  border-color: #FFA500;
+}
+
+.rules-action-btn.tutorial {
+  background: linear-gradient(135deg, #34495e 0%, #4a6b8a 100%);
+  border-color: #4a6b8a;
+  color: #fff;
+}
+
+.rules-action-btn.tutorial:hover {
+  background: linear-gradient(135deg, #34495e 0%, #4a6b8a 100%);
+  border-color: #4a6b8a;
+}
+
+.rules-action-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  flex-shrink: 0;
+}
+
+.rules-icon {
+  width: 20px !important;
+  height: 20px !important;
+  stroke: #f5f5dc !important;
+  fill: none !important;
+  flex-shrink: 0 !important;
+}
+
+.icon-meanings svg {
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 12px;
+  vertical-align: middle;
+  stroke: gold;
+  stroke-width: 1.5;
+}
+
+.help-moon-icon {
+  stroke-width: 2.5 !important;
+  width: 0.9em !important;
+  height: 0.9em !important;
+  vertical-align: baseline !important;
+  margin-right: 8px !important;
+}
+
+.copyright-text {
+  color: #5f83a7;
+  font-size: 0.8rem;
+  margin-top: 1.5rem;
+  text-align: center;
+  align-self: center;
+}
+
+.copyright-text a {
+  color: #5f83a7;
+  text-decoration: underline;
+}
+
+/* IMPROVED RULES DESIGN STYLING */
+
+/* Help Overlay - Förbättrad styling */
+#helpOverlay .overlayContent {
+  max-width: 600px;
+  padding: 2rem;
+}
+
+/* Huvudregler sektion */
+.rules-main {
+  margin-bottom: 2rem;
+}
+
+.rules-section {
+  background: #2c3e50;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid gold;
+  position: relative;
+}
+
+.rules-section-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: gold;
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rules-section-icon {
+  width: 24px;
+  height: 24px;
+  stroke: gold;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+.rules-section p {
+  margin: 0 0 0.75rem 0;
+  line-height: 1.6;
+  color: #f5f5dc;
+}
+
+.rules-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* Steg-för-steg guide */
+.rules-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rules-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background: #1e2a37;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #34495e;
+}
+
+.step-number {
+  background: #34495e;
+  color: gold;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-weight: bold;
+  color: gold;
+  margin: 0 0 0.5rem 0;
+}
+
+.step-description {
+  margin: 0;
+  color: #f5f5dc;
+  line-height: 1.5;
+}
+
+/* Kontroller sektion */
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.control-item {
+  background: #1e2a37;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #34495e;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.control-icon {
+  background: #34495e;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.control-icon-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: gold;
+}
+
+.control-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: gold;
+  stroke-width: 2;
+}
+
+.control-content h4 {
+  margin: 0 0 0.25rem 0;
+  color: gold;
+  font-size: 1rem;
+}
+
+.control-content p {
+  margin: 0;
+  color: #f5f5dc;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Tips sektion */
+.tips-section {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  border: 2px solid #85a0bc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Game Objective specifik stil - ljusblå border som Game Modes */
+.rules-section:first-child {
+  border-left: 4px solid #85a0bc;
+}
+
+.tips-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #85a0bc;
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 0.75rem;
+  color: #f5f5dc;
+  line-height: 1.5;
+}
+
+.tip-bullet {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tip-text {
+  flex: 1;
+}
+
+/* Förbättrade knappar */
+.rules-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 1.5rem;
+  padding-top: 0;
+  border-top: none;
+  width: 100%;
+}
+
+/* Color fixes */
+.card.lost .top-left,
+.card.lost .bottom-right {
+  color: #888 !important;
+}
+
+body.dark-mode .card .top-left,
+body.dark-mode .card .bottom-right {
+  color: #f5f5dc !important;
+}
+
+body.dark-mode .card.lost .top-left,
+body.dark-mode .card.lost .bottom-right {
+  color: #888 !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  body {
+    justify-content: flex-start;
+  }
+  
+  #gameWrapper {
+    justify-content: center;
+    height: calc(100vh - 80px);
+  }
+  
+  #cardGrid {
+    grid-template-columns: repeat(3, 30vw);
+    grid-gap: 12px;
+  }
+  
+  .card {
+    height: 42vw;
+    font-size: 1.6rem;
+  }
+  
+  .top-left,
+  .bottom-right {
+    font-size: 1.7rem;
+  }
+  
+  .buttons button.up,
+  .buttons button.down {
+    width: 65px !important;
+    height: 65px !important;
+    background-color: #2c3e50 !important;
+    color: #f5f5dc !important;
+  }
+  
+  .buttons button.up svg,
+  .buttons button.down svg {
+    width: 32px !important;
+    height: 32px !important;
+    fill: #f5f5dc !important;
+  }
+  
+  .buttons button.up:active,
+  button.down:active {
+    background-color: #090d11 !important;
+  }
+  
+  .buttons button.up:active svg,
+  button.down:active svg {
+    fill: gold !important;
+  }
+  
+  #scoreboard {
+    width: 90vw;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  
+  .overlay-stats {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 250px;
+    margin-bottom: 1.5rem;
+    margin-top: -1rem;
+  }
+  
+  .overlayScore,
+  .overlayTime {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+  }
+  
+  .overlay-buttons {
+    flex-direction: row;
+    gap: 16px;
+  }
+  
+  .overlay-buttons button {
+    padding: 28px 22px;
+    font-size: 16px;
+    width: auto;
+  }
+  
+  .game-mode-btn {
+    padding: 16px 16px !important;
+    font-size: 18px !important;
+  }
+  
+  #gameControls {
+    bottom: 15px;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Settings knappar - samma på alla plattformar */
+  .settings-buttons {
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    padding: 0 !important;
+  }
+  
+  .settings-action-btn {
+    height: 60px !important;
+    padding: 16px !important;
+    font-size: 16px !important;
+  }
+  
+  .settings-action-btn svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  
+  #restartButton,
+  #darkModeButton,
+  #showAllButtons,
+  #settingsButton,
+  #twoPlayerButton {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  #restartButton,
+  #darkModeButton svg,
+  #showAllButtons span,
+  #twoPlayerButton svg {
+    font-size: 32px;
+    font-weight: 300;
+  }
+  
+  #restartButton {
+    font-weight: 200;
+  }
+  
+  #showAllButtons span {
+    font-size: 24px;
+  }
+  
+  .overlayContent {
+    padding: 2rem 1rem;
+  }
+  
+  #helpOverlay .overlayContent,
+  #settingsOverlay .overlayContent,
+  #infoOverlay .overlayContent,
+  #gameModesOverlay .overlayContent {
+    padding: 2rem 1rem;
+  }
+  
+  #helpOverlay .overlayTitle,
+  #highscoreOverlay .overlayTitle {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: gold;
+    padding: 0 1rem;
+  }
+  
+  /* SPECIFIK KLASS FÖR RULES TITEL - MINDRE MARGIN */
+  .rules-title {
+    margin-bottom: 0 !important;
+  }
+  
+  #helpOverlay .rules p,
+  #helpOverlay .icon-meanings p {
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0;
+  }
+  
+  #gameOverOverlay .overlayContent,
+  #winOverlay .overlayContent {
+    max-width: 80vw;
+  }
+  
+  .table-header,
+  .highscore-row {
+    font-size: 14px;
+    padding: 10px 0;
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  
+  .highscore-tabs {
+    flex-direction: row;
+    gap: 3px;
+    max-width: 100%;
+  }
+  
+  .tab-btn {
+    padding: 10px 6px;
+    font-size: 12px;
+    min-width: 0;
+    flex: 1;
+  }
+  
+  .highscore-stats .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .stat-value {
+    font-size: 1.2rem;
+  }
+  
+  .stat-label {
+    font-size: 0.7rem;
+  }
+  
+  .game-mode-icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .game-mode-icon-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Mobile fix för restart-ikon alignment */
+  .icon {
+    margin-left: 0 !important;
+    text-align: left !important;
+  }
+  
+  /* Specifik fix för restart-ikonen på mobil */
+  .icon-meanings p:last-child .icon {
+    margin-left: -2px !important;
+  }
+
+  /* Mobile fix för reset-länkar att matcha toggle-bredden */
+  .reset-links {
+    max-width: 100%;
+    width: 100%;
+    padding: 0 1rem;
+    gap: 20px;
+  }
+  
+  .reset-links a {
+    font-size: 0.75rem;
+    flex: 1;
+    text-align: center;
+  }
+  
+  /* MOBIL FIX FÖR INFOOVERLAY JUSTERINGS-PROBLEM */
+  .preferences-list {
+    padding: 0; /* Ta bort extra padding på mobil */
+    margin: 0 auto;
+  }
+  
+  .preferences-section {
+    padding: 0; /* Ta bort extra padding */
+  }
+  
+  .reset-buttons {
+    padding: 0; /* Ta bort extra padding för reset-knappar */
+  }
+  
+  .info-content {
+    padding: 0; /* Ta bort extra padding */
+  }
+  
+  /* Mobile Rules Styling */
+  #helpOverlay .overlayContent {
+    padding: 1.5rem 1rem;
+    max-width: 90vw;
+  }
+
+  .controls-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rules-actions {
+    flex-direction: column;
+  }
+
+  .rules-section {
+    padding: 1rem;
+  }
+
+  .rules-step {
+    padding: 0.75rem;
+  }
+
+  /* Tutorial Mobile Styles */
+  .tutorial-popup {
+    position: fixed !important;
+    bottom: 10px !important;
+    left: 10px !important;
+    right: 10px !important;
+    max-width: none !important;
+    transform: none !important;
+    max-height: 45vh !important;
+    overflow-y: auto !important;
+    z-index: 1001 !important;
+    top: auto !important;
+  }
+
+  .tutorial-popup.top-center {
+    top: 10px !important;
+    bottom: auto !important;
+    left: 10px !important;
+    right: 10px !important;
+    transform: none !important;
+    max-height: 45vh !important;
+  }
+
+  .tutorial-arrow {
+    display: none !important;
+  }
+
+  .tutorial-overlay-card {
+    width: 30vw !important;
+    height: 42vw !important;
+  }
+
+  .tutorial-overlay-card .lost-card {
+    font-size: 2.5rem !important;
+  }
+
+  #tutorialOverlaySettings {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 24px !important;
+  }
+}
+
+    /* Larger tutorial buttons on mobile */
+    .tutorial-btn {
+        padding: 16px 28px !important; /* Increased from 12px 20px */
+        font-size: 1rem !important; /* Increased from 0.9rem */
+        min-height: 50px; /* Ensures minimum button height */
+        min-width: 100px; /* Ensures minimum button width */
+    }
+    
+    .tutorial-popup-buttons {
+        gap: 12px !important; /* More space between buttons */
+    }
+}
+
+/* Tablet responsive */
+@media (min-width: 481px) and (max-width: 1024px) {
+  #gameWrapper {
+    justify-content: center;
+    padding-bottom: 100px;
+  }
+  
+  #scoreboard {
+    width: 60vw;
+    max-width: 500px;
+    min-width: 400px;
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+  }
+  
+  #score .value,
+  #deckCounter .value {
+    font-size: 1.8rem;
+  }
+  
+  #gameMode .label,
+  #timer .label {
+    font-size: 1.1rem;
+  }
+  
+  #gameMode .value,
+  #timer .value {
+    font-size: 1.1rem;
+  }
+  
+  #cardGrid {
+    grid-template-columns: repeat(3, 140px);
+    grid-gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    height: 200px;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 1.4rem;
+  }
+  
+  .top-left,
+  .bottom-right {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+  
+  .buttons {
+    gap: 8px;
+  }
+  
+  .buttons button.up,
+  .buttons button.down {
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+  }
+  
+  .buttons button.up svg,
+  .buttons button.down svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  #gameControls {
+    bottom: 25px;
+    gap: 15px;
+  }
+  
+  #restartButton,
+  #darkModeButton,
+  #showAllButtons,
+  #settingsButton,
+  #twoPlayerButton {
+    width: 65px !important;
+    height: 65px !important;
+    font-size: 32px !important;
+  }
+  
+  #darkModeButton svg,
+  #settingsButton svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  #showAllButtons span {
+    font-size: 30px;
+  }
+  
+  .overlayContent {
+    padding: 2.5rem;
+  }
+  
+  #helpOverlay .overlayContent,
+  #settingsOverlay .overlayContent,
+  #infoOverlay .overlayContent,
+  #gameModesOverlay .overlayContent {
+    padding: 2.5rem;
+  }
+  
+  /* FIX FÖR TABLET MODE - BEGRÄNSA RESET-KNAPPARNAS BREDD */
+  .reset-buttons {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  /* Settings overlay reset-knappar samma bredd som toggles */
+  #settingsOverlay .reset-btn {
+    width: 100% !important;
+    margin: 0 !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+  }
+  
+  #settingsOverlay .reset-buttons {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 16px !important;
+    margin: 0 !important;
+  }
+  
+  /* FORCE RESET-BUTTONS PADDING PÅ ALLA TABLETS */
+  .reset-buttons {
+    padding: 0 16px !important;
+  }
+  
+  /* FIX FÖR TABLET MODE - JUSTERA SETTINGS TITEL ALIGNMENT */
+  #infoOverlay .overlayTitle {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    color: #f5f5dc;
+    padding: 0 1rem;
+  }
+  
+  #gameOverOverlay h2,
+  #winOverlay h2 {
+    font-size: 2.8rem;
+  }
+  
+  .overlaySubtitle {
+    font-size: 1.4rem;
+  }
+  
+  .overlayScore,
+  .overlayTime {
+    font-size: 1.5rem;
+  }
+  
+  .overlay-buttons {
+    gap: 12px;
+    margin-top: 0.2rem;
+    flex-direction: row;
+  }
+  
+  .overlay-buttons button {
+    padding: 28px 26px;
+    font-size: 16px;
+    font-weight: bold;
+    min-width: 130px;
+    width: auto;
+  }
+  
+  .game-mode-btn {
+    padding: 16px 16px !important;
+    font-size: 18px !important;
+  }
+  
+  #closeOverlayBtn,
+  #closeHelpOverlayBtn,
+  #closeWinOverlayBtn,
+  #closeHighscoreBtn,
+  #closeSettingsBtn,
+  #closeInfoOverlayBtn,
+  #closeGameModesBtn,
+  #closeTwoPlayerBtn {
+    position: fixed;
+    font-size: 52px;
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
+  }
+  
+  .highscore-stats .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Tablet Rules Styling */
+  #helpOverlay .overlayContent {
+    padding: 2.5rem;
+  }
+}
+
+/* Medium Tablet (481px - 768px) - iPad och liknande */
+@media (min-width: 481px) and (max-width: 768px) {
+  #gameWrapper {
+    justify-content: center;
+    padding-bottom: 100px;
+  }
+  
+  #scoreboard {
+    width: 60vw;
+    max-width: 500px;
+    min-width: 400px;
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+  }
+  
+  #score .value,
+  #deckCounter .value {
+    font-size: 1.8rem;
+  }
+  
+  #gameMode .label,
+  #timer .label {
+    font-size: 1.1rem;
+  }
+  
+  #gameMode .value,
+  #timer .value {
+    font-size: 1.1rem;
+  }
+  
+  #cardGrid {
+    grid-template-columns: repeat(3, 160px); /* Stora kort för iPad */
+    grid-gap: 25px;
+    margin-bottom: 25px;
+  }
+  
+  .card {
+    height: 220px; /* Höga kort för iPad */
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 1.4rem;
+  }
+  
+  .top-left,
+  .bottom-right {
+    font-size: 2rem; /* Stora text för iPad */
+    font-weight: 700;
+  }
+  
+  .buttons {
+    gap: 10px;
+  }
+  
+  .buttons button.up,
+  .buttons button.down {
+    width: 65px; /* Stora knappar för iPad */
+    height: 65px;
+    font-size: 28px;
+  }
+  
+  .buttons button.up svg,
+  .buttons button.down svg {
+    width: 32px; /* Stora ikoner för iPad */
+    height: 32px;
+  }
+  
+  #gameControls {
+    bottom: 25px;
+    gap: 15px;
+  }
+  
+  #restartButton,
+  #darkModeButton,
+  #showAllButtons,
+  #settingsButton,
+  #twoPlayerButton {
+    width: 65px !important;
+    height: 65px !important;
+    font-size: 32px !important;
+  }
+  
+  #darkModeButton svg,
+  #settingsButton svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  #showAllButtons span {
+    font-size: 30px;
+  }
+  
+  .overlayContent {
+    max-width: 70vw;
+    padding: 2.5rem;
+  }
+  
+  #helpOverlay .overlayContent,
+  #settingsOverlay .overlayContent,
+  #infoOverlay .overlayContent,
+  #gameModesOverlay .overlayContent {
+    max-width: 70vw;
+    padding: 2.5rem;
+  }
+  
+  /* Bredare overlay-knappar för tablet */
+  .overlay-buttons {
+    gap: 20px;
+    margin-top: 1.5rem;
+  }
+  
+  .overlay-buttons button {
+    padding: 28px 32px;
+    font-size: 18px;
+    border-radius: 12px;
+    min-width: 180px;
+    max-width: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .overlay-buttons .button-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+  
+  /* Game over overlay specifikt för tablet */
+  #gameOverOverlay .overlayContent {
+    padding: 3rem;
+    max-width: 500px;
+  }
+  
+  #gameOverOverlay h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  #gameOverOverlay .overlaySubtitle {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  #gameOverOverlay .overlay-stats {
+    margin-bottom: 2rem;
+  }
+  
+  #gameOverOverlay .overlay-stats p {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  /* Hover-effekter för tablet */
+  .overlay-buttons button:hover {
+    background-color: #2c3e50;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  .overlay-buttons button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Large tablet/small desktop */
+@media (min-width: 769px) and (max-width: 1024px) {
+  #gameWrapper {
+    justify-content: center;
+    padding-bottom: 100px;
+  }
+  
+  #cardGrid {
+    grid-template-columns: repeat(3, 160px);
+    grid-gap: 25px;
+  }
+  
+  .card {
+    height: 220px;
+    padding: 12px;
+  }
+  
+  .top-left,
+  .bottom-right {
+    font-size: 2rem;
+  }
+  
+  .buttons button.up,
+  .buttons button.down {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .buttons button.up svg,
+  .buttons button.down svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  #scoreboard {
+    font-size: 1.5rem;
+    margin-bottom: 35px;
+  }
+  
+  #score .value,
+  #deckCounter .value {
+    font-size: 2rem;
+  }
+  
+  #gameMode .label {
+    font-size: 1.2rem;
+  }
+  
+  #gameMode .value {
+    font-size: 1.2rem;
+  }
+  
+  /* Knappar för large tablets */
+  #restartButton,
+  #darkModeButton,
+  #showAllButtons,
+  #settingsButton,
+  #twoPlayerButton {
+    width: 65px !important;
+    height: 65px !important;
+    font-size: 32px !important;
+  }
+  
+  #darkModeButton svg,
+  #settingsButton svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  #showAllButtons span {
+    font-size: 30px;
+  }
+  
+  /* Fix overlay centering on large tablets */
+  .overlayContent {
+    justify-content: center;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  #gameOverOverlay .overlayContent,
+  #winOverlay .overlayContent {
+    max-width: 400px;
+    max-height: 85vh;
+  }
+  
+  #helpOverlay .overlayContent,
+  #settingsOverlay .overlayContent,
+  #infoOverlay .overlayContent,
+  #gameModesOverlay .overlayContent,
+  #twoPlayerOverlay .overlayContent {
+    max-width: 500px;
+    max-height: 85vh;
+  }
+  
+  #highscoreOverlay .overlayContent {
+    max-width: 500px;
+    max-height: 95vh;
+  }
+  
+  .overlay-buttons {
+    margin-top: 0.2rem;
+  }
+  
+  .overlay-buttons button {
+    font-size: 16px;
+    min-width: 140px;
+    padding: 24px 24px;
+  }
+  
+  #helpOverlay .overlayTitle,
+  #infoOverlay .overlayTitle {
+    text-align: left;
+    padding-left: 0;
+    margin-left: 0;
+  }
+  
+  .rules,
+  .icon-meanings,
+  .info-content {
+    text-align: left;
+    max-width: 100%;
+    padding-left: 0;
+    margin-left: 0;
+  }
+  
+  .rules,
+  .icon-meanings,
+  .info-content,
+  .preferences-section {
+    text-align: left;
+    max-width: 100%;
+    padding-left: 0;
+    margin-left: 0;
+  }
+  
+  /* Desktop - flytta toggle-boxarna åt vänster för att kompensera för padding */
+  .preference-item {
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+  }
+  
+  .rules p,
+  .icon-meanings p,
+  .info-content p {
+    max-width: 500px;
+    text-align: left;
+  }
+  
+  .rules-buttons {
+    width: 100%;
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+  
+  /* Desktop - säkerställ full bredd för rules-knappar */
+  .rules-buttons .rules-action-btn {
+    width: 100%;
+  }
+  
+  #showAllButtons span {
+    font-weight: 300;
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -2px;
+  }
+  
+  .highscore-stats .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Desktop - större månikon */
+  .help-moon-icon {
+    width: 1.1em !important;
+    height: 1.1em !important;
+  }
+}
+
+/* FORCE ICON STYLING - MÅSTE VARA SIST I CSS */
+.icon {
+  font-size: 1.5em !important;
+  color: gold !important;
+  margin-right: 12px !important;
+  display: inline-block !important;
+}
+
+/* Special media query for very small screens like iPhone SE */
+@media (max-width: 375px) and (max-height: 667px) {
+  .tutorial-popup {
+    max-height: 50vh !important;
+  }
+  
+  .tutorial-popup.top-center {
+    max-height: 50vh !important;
+  }
+}
+
+/* 360px-375px - use 0.8rem font size only */
+@media (min-width: 360px) and (max-width: 375px) {
+  .modes-grid .game-mode-name {
+    font-size: 0.8rem !important;
+  }
+  
+  .modes-grid .game-mode-desc {
+    font-size: 0.8rem !important;
+  }
+}
+
+/* TABLET MODE FIXES - HÖGSTA PRIORITET */
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+  /* Scoreboard bredare för tablet */
+  #scoreboard {
+    width: 480px !important;
+    max-width: 90vw !important;
+    min-width: 480px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+  }
+  
+  /* Korrekt layout och ordning */
+  #score {
+    flex: 0 0 48% !important;
+    order: 1 !important;
+    text-align: left !important;
+  }
+  
+  #deckCounter {
+    flex: 0 0 48% !important;
+    order: 2 !important;
+    text-align: right !important;
+  }
+  
+  #timer {
+    flex: 0 0 48% !important;
+    order: 3 !important;
+    text-align: left !important;
+  }
+  
+  #gameMode {
+    flex: 0 0 48% !important;
+    order: 4 !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+  }
+  
+  /* Font-storlekar för timer och gameMode */
+  #timer .label,
+  #gameMode .label {
+    font-size: 1.1rem !important;
+    color: #f5f5dc !important;
+    font-weight: 400 !important;
+  }
+  
+  #timer .value,
+  #gameMode .value {
+    font-size: 1.1rem !important;
+    color: #f5f5dc !important;
+    font-weight: 400 !important;
+  }
+  
+  /* Overlay-bredder */
+  .overlayContent {
+    max-width: 70vw !important;
+  }
+  
+  /* Settings overlay knappar samma bredd som toggles */
+  #settingsOverlay .reset-btn {
+    width: 100% !important;
+    padding: 18px 16px !important;
+    margin: 0 !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Reset-buttons container samma struktur som toggles */
+  #settingsOverlay .reset-buttons {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Tutorial-kort större för tablet */
+  .tutorial-overlay-card {
+    width: 140px !important;
+    height: 200px !important;
+    transform: scale(1.08) translate(10px, 10px) !important;
+  }
+  
+  /* Step 4 (lost kort) specifik positionering */
+  .tutorial-overlay-card.lost,
+  .tutorial-overlay-card.lost-glow {
+    transform: scale(1.08) translate(7px, 9px) !important;
+  }
+  
+  /* FORCE RESET-BUTTONS PADDING PÅ ALLA TABLETS - HÖGSTA PRIORITET */
+  .reset-buttons {
+    padding: 0 16px !important;
+  }
+  
+  /* Bredare overlay-knappar för large tablet */
+  .overlay-buttons {
+    gap: 20px;
+    margin-top: 1.5rem;
+  }
+  
+  .overlay-buttons button {
+    padding: 28px 32px;
+    font-size: 18px;
+    border-radius: 12px;
+    min-width: 200px;
+    max-width: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: auto;
+  }
+  
+  .overlay-buttons .button-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+  
+  /* Game over overlay specifikt för large tablet */
+  #gameOverOverlay .overlayContent {
+    padding: 3rem;
+    max-width: 550px;
+  }
+  
+  #gameOverOverlay h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  #gameOverOverlay .overlaySubtitle {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  #gameOverOverlay .overlay-stats {
+    margin-bottom: 2rem;
+  }
+  
+  #gameOverOverlay .overlay-stats p {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  /* Hover-effekter för large tablet */
+  .overlay-buttons button:hover {
+    background-color: #2c3e50;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  .overlay-buttons button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* 2 Player Mode Styles */
+#twoPlayerButton {
+  background: #34495e;
+  border: none;
+  color: #f5f5dc;
+  font-size: 28px;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  transition: background-color 0.15s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  line-height: 1;
+}
+
+#twoPlayerButton:hover {
+  background: #2c3e50;
+}
+
+#twoPlayerButton:active {
+  background-color: #1e2a37;
+}
+
+#twoPlayerButton svg {
+  width: 24px;
+  height: 24px;
+  stroke: #f5f5dc;
+  stroke-width: 2;
+}
+
+/* 2 Player Overlay Styles - Remove max-width to use standard overlay width */
+
+.two-player-info {
+  margin-bottom: 1.5rem;
+}
+
+.player-info-section {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  background: rgba(52, 73, 94, 0.3);
+  border-radius: 12px;
+  border-left: 4px solid #FFD700;
+}
+
+.player-info-section h3 {
+  color: #FFD700;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.player-info-section p {
+  color: #f5f5dc;
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.player-info-section ul {
+  color: #f5f5dc;
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.player-info-section li {
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.two-player-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.two-player-btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  min-width: 180px;
+  justify-content: center;
+}
+
+.two-player-btn.primary {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #2c3e50;
+}
+
+.two-player-btn.primary:hover {
+  background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+.two-player-btn.secondary {
+  background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+  color: #f5f5dc;
+  border: 2px solid #FFD700;
+}
+
+.two-player-btn.secondary:hover {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.2);
+}
+
+.two-player-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+/* Responsive design för 2-player overlay */
+@media screen and (max-width: 768px) {
+  .two-player-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .two-player-btn {
+    min-width: 250px;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .player-info-section {
+    padding: 0.8rem;
+  }
+}
