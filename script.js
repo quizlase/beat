@@ -3902,7 +3902,7 @@ class PWAInstaller {
     // Create install button
     const installBtn = document.createElement('button');
     installBtn.id = 'pwa-install-btn';
-    installBtn.innerHTML = '📱 Install Beat the Deck Pro';
+    installBtn.innerHTML = '📱 Install app';
     
     // Apply styles directly to ensure they take effect
     installBtn.style.position = 'fixed';
@@ -3911,7 +3911,7 @@ class PWAInstaller {
     installBtn.style.transform = 'translateX(-50%)';
     installBtn.style.background = '#16213e';
     installBtn.style.color = 'white';
-    installBtn.style.border = '2px solid #4CAF50';
+    installBtn.style.border = 'none';
     installBtn.style.padding = '15px 30px';
     installBtn.style.borderRadius = '30px';
     installBtn.style.fontSize = '16px';
@@ -3929,12 +3929,10 @@ class PWAInstaller {
     installBtn.addEventListener('mouseenter', () => {
       installBtn.style.transform = 'translateX(-50%) scale(1.05)';
       installBtn.style.background = '#1a1a2e';
-      installBtn.style.borderColor = '#66BB6A';
     });
     installBtn.addEventListener('mouseleave', () => {
       installBtn.style.transform = 'translateX(-50%) scale(1)';
       installBtn.style.background = '#16213e';
-      installBtn.style.borderColor = '#4CAF50';
     });
 
     document.body.appendChild(installBtn);
