@@ -604,7 +604,7 @@ function triggerVibration(pattern = [100]) {
     if (hasVibrate) {
       const result = navigator.vibrate(pattern);
       console.log('Standard vibration result:', result);
-      if (result) {
+      if (result !== false) {
         console.log('Vibration triggered successfully with standard API');
         return;
       }
@@ -614,13 +614,37 @@ function triggerVibration(pattern = [100]) {
     if (hasWebkitVibrate) {
       const result = navigator.webkitVibrate(pattern);
       console.log('Webkit vibration result:', result);
-      if (result) {
+      if (result !== false) {
         console.log('Vibration triggered successfully with webkit API');
         return;
       }
     }
     
-    console.log('No vibration method returned true');
+    // Försök med enklare pattern om det första misslyckades
+    if (pattern.length > 1) {
+      console.log('Trying simpler vibration pattern...');
+      const simplePattern = [50];
+      if (hasVibrate) {
+        const result = navigator.vibrate(simplePattern);
+        if (result !== false) {
+          console.log('Simple vibration pattern worked');
+          return;
+        }
+      }
+    }
+    
+    // Försök med mycket kort vibration som sista utväg
+    console.log('Trying very short vibration as last resort...');
+    const veryShortPattern = [25];
+    if (hasVibrate) {
+      const result = navigator.vibrate(veryShortPattern);
+      if (result !== false) {
+        console.log('Very short vibration pattern worked');
+        return;
+      }
+    }
+    
+    console.log('No vibration method returned true - this might be due to PWA restrictions or device limitations');
     
   } catch (error) {
     console.log('Vibration error:', error);
@@ -629,24 +653,112 @@ function triggerVibration(pattern = [100]) {
       message: error.message,
       stack: error.stack
     });
+    console.log('This might be due to PWA security restrictions or device limitations');
   }
 }
 
 // Debug funktion för att testa vibration
 function testVibration() {
-  console.log('Testing vibration...');
+  console.log('=== TESTING VIBRATION ===');
   console.log('isVibrationEnabled:', isVibrationEnabled);
   console.log('navigator.vibrate available:', 'vibrate' in navigator);
+  console.log('navigator.webkitVibrate available:', 'webkitVibrate' in navigator);
+  console.log('PWA mode:', window.matchMedia('(display-mode: standalone)').matches || 
+              window.navigator.standalone === true ||
+              document.referrer.includes('android-app://'));
   console.log('User agent:', navigator.userAgent);
   
   // Test olika vibration patterns
+  console.log('Testing simple vibration...');
   triggerVibration([100]);
-  setTimeout(() => triggerVibration([50, 50, 50]), 200);
-  setTimeout(() => triggerVibration([200]), 500);
+  
+  setTimeout(() => {
+    console.log('Testing complex vibration...');
+    triggerVibration([50, 50, 50]);
+  }, 200);
+  
+  setTimeout(() => {
+    console.log('Testing long vibration...');
+    triggerVibration([200]);
+  }, 500);
+  
+  setTimeout(() => {
+    console.log('Testing very short vibration...');
+    triggerVibration([25]);
+  }, 800);
 }
 
 // Exponera test-funktioner globalt för debugging
 window.testVibration = testVibration;
+window.vibrate = triggerVibration;
+
+// Funktion för att visa vibration-status till användaren
+function showVibrationStatus() {
+  const hasVibrate = 'vibrate' in navigator;
+  const hasWebkitVibrate = 'webkitVibrate' in navigator;
+  const isPWA = window.matchMedia('(display-mode: standalone)').matches || 
+                window.navigator.standalone === true ||
+                document.referrer.includes('android-app://');
+  
+  console.log('=== VIBRATION STATUS ===');
+  console.log('Vibration enabled in settings:', isVibrationEnabled);
+  console.log('Standard vibration API:', hasVibrate);
+  console.log('Webkit vibration API:', hasWebkitVibrate);
+  console.log('PWA mode:', isPWA);
+  console.log('Vibration activated:', vibrationActivated);
+  console.log('User agent:', navigator.userAgent);
+  
+  if (!isVibrationEnabled) {
+    console.log('❌ Vibration is disabled in settings');
+    return false;
+  }
+  
+  if (!hasVibrate && !hasWebkitVibrate) {
+    console.log('❌ Vibration API not supported on this device/browser');
+    return false;
+  }
+  
+  if (isPWA && !vibrationActivated) {
+    console.log('⚠️ PWA mode detected - vibration needs user interaction to activate');
+    return false;
+  }
+  
+  console.log('✅ Vibration should work');
+  return true;
+}
+
+// Exponera status-funktion globalt
+window.vibrationStatus = showVibrationStatus;
+
+// PWA Vibration Activation - Aktivera vibration vid första användarinteraktion
+let vibrationActivated = false;
+let vibrationPermissionGranted = false;
+
+function activateVibrationForPWA() {
+  if (vibrationActivated) return;
+  
+  console.log('Activating vibration for PWA...');
+  vibrationActivated = true;
+  vibrationPermissionGranted = true;
+  
+  // Testa vibration för att aktivera den
+  if (isVibrationEnabled) {
+    console.log('Testing vibration activation...');
+    triggerVibration([50]);
+  }
+}
+
+// Aktivera vibration vid första klick/touch
+document.addEventListener('click', activateVibrationForPWA, { once: true });
+document.addEventListener('touchstart', activateVibrationForPWA, { once: true });
+
+// Aktivera vibration vid första gissning också
+function ensureVibrationActivated() {
+  if (!vibrationActivated && isVibrationEnabled) {
+    console.log('Activating vibration on first guess...');
+    activateVibrationForPWA();
+  }
+}
 
 // Test funktion för uppdateringar
 window.testUpdate = function() {
@@ -1556,6 +1668,9 @@ function renderButtons() {
 }
 
 function guess(direction, idx) {
+  // Aktivera vibration vid första gissning om det behövs
+  ensureVibrationActivated();
+  
   // Handle Battle Royale mode first
   if (battleRoyaleState.isActive) {
     const result = battleRoyaleGuess(direction, idx);
@@ -3661,6 +3776,9 @@ function showBattleRoyaleGlowEffects(cardValue) {
 }
 
 function battleRoyaleGuess(direction, cardIndex) {
+  // Aktivera vibration vid första gissning om det behövs
+  ensureVibrationActivated();
+  
   if (!battleRoyaleState.isActive || battleRoyaleState.gameEnded) return false;
   if (!grid[cardIndex] || grid[cardIndex].lost) return false;
   
@@ -3721,6 +3839,9 @@ function battleRoyaleGuess(direction, cardIndex) {
     // Lose life
     battleRoyaleState[currentPlayerLives]--;
     updateBattleRoyaleLives(battleRoyaleState.currentPlayer, -1);
+    
+    // Vibrera vid fel gissning i Battle Royale
+    triggerVibration([100]);
     
     // Show wrong guess cross animation and shake animation simultaneously
     showWrongGuessCross(battleRoyaleState.currentPlayer, cardIndex);
